@@ -1,0 +1,308 @@
+{
+  "name": "Track YouTube channel stats weekly in Google Sheets with Apify",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "triggerAtDay": [
+                1
+              ],
+              "triggerAtHour": 8
+            }
+          ]
+        }
+      },
+      "name": "Every Monday at 8am",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "394ac86d-f6b5-41b5-a7da-4aff7a0df1b3",
+              "name": "channels",
+              "value": "={{ [\n  'https://www.youtube.com/@mkbhd',\n  'https://www.youtube.com/@veritasium'\n] }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Set channels to track",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.apify.com/v2/acts/tubetext~youtube-channel-analytics/run-sync-get-dataset-items?timeout=300",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ channels: $json.channels, recentVideos: 10, includeSocialBlade: true, includeDailyHistory: false }) }}",
+        "options": {
+          "timeout": 310000
+        }
+      },
+      "name": "Get channel stats from Apify",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        520,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4e690ab3-d292-4f98-9e66-2b17d2353b3a",
+              "name": "date",
+              "value": "={{ $now.toFormat('yyyy-MM-dd') }}",
+              "type": "string"
+            },
+            {
+              "id": "686fdd49-2400-44f2-8315-aef1d8e1ee56",
+              "name": "channel",
+              "value": "={{ $json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "0aeda8cd-c58d-47f8-b2ce-16a7b1968558",
+              "name": "handle",
+              "value": "={{ $json.handle }}",
+              "type": "string"
+            },
+            {
+              "id": "4cbba2a4-98c3-441c-a293-f3cf3942c6cf",
+              "name": "subscribers",
+              "value": "={{ $json.subscribers }}",
+              "type": "number"
+            },
+            {
+              "id": "84b22302-4ee7-4897-a2f8-76cd1a9b15bb",
+              "name": "totalViews",
+              "value": "={{ $json.totalViews }}",
+              "type": "number"
+            },
+            {
+              "id": "bb067c4c-b292-4db3-9995-8127e00446b6",
+              "name": "videoCount",
+              "value": "={{ $json.videoCount }}",
+              "type": "number"
+            },
+            {
+              "id": "dbc006a5-b3bf-40a9-bee5-bb1c4fb54787",
+              "name": "avgViewsLast10",
+              "value": "={{ $json.avgViewsRecent }}",
+              "type": "number"
+            },
+            {
+              "id": "73d1ee76-389b-4afa-bb41-6d255259c9d5",
+              "name": "medianViewsLast10",
+              "value": "={{ $json.medianViewsRecent }}",
+              "type": "number"
+            },
+            {
+              "id": "3ace9ee7-c649-4b64-8922-afdb338f1d77",
+              "name": "uploadsPerWeek",
+              "value": "={{ $json.uploadsPerWeek }}",
+              "type": "number"
+            },
+            {
+              "id": "8df20d04-6e19-45bb-947d-fc42053a333b",
+              "name": "daysSinceLastUpload",
+              "value": "={{ $json.daysSinceLastUpload }}",
+              "type": "number"
+            },
+            {
+              "id": "9c8ab09d-b90d-4333-a302-6f3c2fa3c2a3",
+              "name": "viewsGained14d",
+              "value": "={{ $json.socialBlade?.viewsGainedPeriod ?? \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "1a93f8ba-d997-4c59-b34f-04d3fd12d63d",
+              "name": "socialBladeGrade",
+              "value": "={{ $json.socialBlade?.grade ?? \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "4add4c92-1ebd-45b8-940b-a1c11bac5d1d",
+              "name": "estMonthlyEarningsUsd",
+              "value": "={{ ($json.socialBlade?.estMonthlyEarningsUsd || []).join(' - ') }}",
+              "type": "string"
+            },
+            {
+              "id": "ca723f45-8f2c-497c-9915-bf817eca306a",
+              "name": "status",
+              "value": "={{ $json.status }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Format one row per channel",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        800,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "mode": "url",
+          "value": ""
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "name",
+          "value": "Sheet1"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": []
+        },
+        "options": {}
+      },
+      "name": "Append rows to Google Sheet",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1080,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Track YouTube channel stats weekly in Google Sheets\n\nEvery Monday this workflow pulls public stats for a list of YouTube channels (yours or competitors') and appends one row per channel to a Google Sheet, so you build a week-by-week history without manual checks.\n\n### Who it's for\nCreators, YouTube agencies and marketers who benchmark channels, track competitors or report growth to clients.\n\n### How it works\n1. **Every Monday at 8am** starts the run (change the schedule as you like).\n2. **Set channels to track** holds channel URLs, `@handles` or channel IDs.\n3. **Get channel stats from Apify** calls the YouTube Channel Analytics Actor once for all channels: subscribers, total views, video count, average and median views of the last 10 uploads, upload frequency, plus Social Blade grade, 14-day views gained and estimated monthly earnings.\n4. **Format one row per channel** keeps the columns that matter and adds today's date.\n5. **Append rows to Google Sheet** writes the rows. The columns are matched by name.\n\n### Setup steps (5 min)\n1. Create an Apify account and copy your API token (Console > Settings > API & Integrations).\n2. In **Get channel stats from Apify** create a *Header Auth* credential: Name `Authorization`, Value `Bearer <your token>`.\n3. Create a Google Sheet with these headers in row 1: `date, channel, handle, subscribers, totalViews, videoCount, avgViewsLast10, medianViewsLast10, uploadsPerWeek, daysSinceLastUpload, viewsGained14d, socialBladeGrade, estMonthlyEarningsUsd, status`. Paste its URL into **Append rows to Google Sheet** and connect your Google account.\n4. Edit the channel list, run once to test, then activate the workflow.\n\n### Customization\nAdd a Slack or Gmail node after the sheet for a weekly summary, or set `includeSocialBlade: false` in the request body to skip Social Blade data.\n\n*Disclosure: I maintain the Apify Actor used here.*",
+        "height": 840,
+        "width": 600
+      },
+      "name": "Template overview",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -660,
+        -420
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## 1. Schedule and channels\nRuns weekly. Add channel URLs, @handles or IDs.",
+        "height": 360,
+        "width": 440,
+        "color": 7
+      },
+      "name": "Step 1 note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        -180
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## 2. Fetch stats\nOne Apify call for all channels. Add your Apify token as a Header Auth credential.",
+        "height": 360,
+        "width": 240,
+        "color": 7
+      },
+      "name": "Step 2 note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        440,
+        -180
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## 3. Save to Google Sheets\nOne row per channel per week. Row 1 of your sheet needs the column headers listed in the overview.",
+        "height": 360,
+        "width": 500,
+        "color": 7
+      },
+      "name": "Step 3 note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        720,
+        -180
+      ]
+    }
+  ],
+  "connections": {
+    "Every Monday at 8am": {
+      "main": [
+        [
+          {
+            "node": "Set channels to track",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set channels to track": {
+      "main": [
+        [
+          {
+            "node": "Get channel stats from Apify",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get channel stats from Apify": {
+      "main": [
+        [
+          {
+            "node": "Format one row per channel",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format one row per channel": {
+      "main": [
+        [
+          {
+            "node": "Append rows to Google Sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {}
+}

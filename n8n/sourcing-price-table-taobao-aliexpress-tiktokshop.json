@@ -1,0 +1,235 @@
+{
+  "name": "Product sourcing price table: Taobao vs AliExpress vs TikTok Shop",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "799454cc-6815-4cc9-aebd-2498a3de8335",
+      "name": "Run manually",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "991b7763-da34-4ed2-b128-bd8532a17bc8",
+              "name": "keyword",
+              "value": "yoga mat",
+              "type": "string"
+            },
+            {
+              "id": "b8bcaa08-16bc-4d39-ab62-7f67d380cfc3",
+              "name": "taobaoKeyword",
+              "value": "瑜伽垫",
+              "type": "string"
+            },
+            {
+              "id": "74a76a3a-f700-4381-bd77-ccac9a846bc0",
+              "name": "tiktokShopUrls",
+              "value": "={{ [] }}",
+              "type": "array"
+            },
+            {
+              "id": "757d843d-2cfd-48eb-85cd-3ef4c5463da1",
+              "name": "maxItemsPerPlatform",
+              "value": 20,
+              "type": "number"
+            },
+            {
+              "id": "d3121774-23d7-4af5-872a-a835d988aefe",
+              "name": "shipTo",
+              "value": "US",
+              "type": "string"
+            },
+            {
+              "id": "d6f4142d-9ac4-4362-adfc-6ccd45b388c7",
+              "name": "cnyPerUsd",
+              "value": 7.1,
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "0fbc59b2-0723-4160-b2ec-775eec21e8f7",
+      "name": "Set your product idea",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        220,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Build one Apify call per platform from the inputs above.\nconst s = $input.first().json;\nconst calls = [];\nconst max = Number(s.maxItemsPerPlatform) || 20;\ncalls.push({ platform: 'Taobao/Tmall', actor: 'tubetext~taobao-tmall-scraper',\n  input: { keywords: [s.taobaoKeyword || s.keyword], maxItemsPerQuery: max } });\ncalls.push({ platform: 'AliExpress', actor: 'tubetext~aliexpress-search-scraper',\n  input: { keywords: [s.keyword], maxItemsPerKeyword: max, sortBy: 'orders', shipTo: s.shipTo || 'US', currency: 'USD', skipNewShopperDeals: true } });\nconst tts = (s.tiktokShopUrls || []).map(u => String(u).trim()).filter(Boolean);\nif (tts.length) calls.push({ platform: 'TikTok Shop', actor: 'tubetext~tiktok-shop-product-scraper',\n  input: { urls: tts, maxProductsPerListing: max } });\nreturn calls.map(c => ({ json: c }));"
+      },
+      "id": "52359b16-10a3-40f2-8c49-5cd997f6363d",
+      "name": "Build one call per platform",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        440,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.apify.com/v2/acts/{{ $json.actor }}/run-sync-get-dataset-items?timeout=300",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.input) }}",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": false
+            }
+          },
+          "timeout": 320000
+        }
+      },
+      "id": "1179ace9-c6c9-4184-b07f-08da1b04b7eb",
+      "name": "Search each platform on Apify",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        660,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Turn all returned products into one comparison row per platform (prices in USD).\nconst s = $('Set your product idea').first().json;\nconst cnyPerUsd = Number(s.cnyPerUsd) || 7.1;\nconst platformOf = it => /taobao|tmall/i.test(it.url || '') ? 'Taobao/Tmall'\n  : /aliexpress/i.test(it.url || '') ? 'AliExpress'\n  : /tiktok/i.test(it.url || '') ? 'TikTok Shop' : null;\nconst usd = it => it.priceCNY != null ? it.priceCNY / cnyPerUsd : (typeof it.price === 'number' ? it.price : null);\nconst groups = {};\nfor (const { json: it } of $input.all()) {\n  const p = platformOf(it);\n  if (!p || it.status !== 'ok') continue;\n  (groups[p] = groups[p] || []).push(it);\n}\nreturn Object.entries(groups).map(([platform, items]) => {\n  const prices = items.map(usd).filter(x => x != null).sort((a, b) => a - b);\n  const top = [...items].sort((a, b) => (b.soldCount || 0) - (a.soldCount || 0) || (usd(a) || 0) - (usd(b) || 0)).slice(0, 5);\n  return { json: {\n    platform,\n    products: items.length,\n    minPriceUSD: prices.length ? +prices[0].toFixed(2) : null,\n    medianPriceUSD: prices.length ? +prices[Math.floor(prices.length / 2)].toFixed(2) : null,\n    top5: top.map(it => `${(usd(it) ?? 0).toFixed(2)} USD | ${it.soldCount ? it.soldCount + ' sold | ' : ''}${(it.title || '').slice(0, 60)} | ${it.url}`).join('\\n'),\n  }};\n});"
+      },
+      "id": "2852dd88-7af3-4f67-ab91-e079e5cb9ea8",
+      "name": "Build price comparison table",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        880,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Product sourcing price table: Taobao vs AliExpress vs TikTok Shop\n\nType a product idea and get one row per platform: number of products, lowest and median price in USD, and the top 5 listings (by items sold where the platform shows it).\n\n### How it works\n1. **Taobao/Tmall** – source prices in CNY (converted with your rate)\n2. **AliExpress** – same keyword, sorted by orders, new-shopper deals skipped\n3. **TikTok Shop** (optional) – paste a category or product links; TikTok Shop has no keyword search\n\n### Setup\n- Create an Apify account and add your API token as a **Header Auth** credential (`Authorization: Bearer <token>`) on the HTTP Request node.\n- Edit **Set your product idea**.\n\n### Cost\nPay-per-result Apify Actors by TubeText Labs; 20 products per platform cost roughly $0.10–0.20 per run.",
+        "height": 520,
+        "width": 420
+      },
+      "id": "1ac72ac4-5cb5-4735-aab8-6a3b5aa1c72d",
+      "name": "Template overview",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -460,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## 1. Your product idea\nEnglish keyword for AliExpress, Chinese or English for Taobao, optional TikTok Shop links, and your CNY→USD rate.",
+        "height": 360,
+        "width": 420,
+        "color": 7
+      },
+      "id": "5b065c7b-7534-4202-b19c-a3167316a01c",
+      "name": "Step 1 note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        160,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## 2. Search each platform\nOne Apify call per platform. Failed items are free.",
+        "height": 360,
+        "width": 420,
+        "color": 7
+      },
+      "id": "7cd6ff5f-9b94-400d-a83d-709d6fa2335f",
+      "name": "Step 2 note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        600,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## 3. Compare\nOne row per platform. Send it to Google Sheets, Slack or email by adding a node here.",
+        "height": 360,
+        "width": 300,
+        "color": 7
+      },
+      "id": "34a9d441-bf90-4ee8-92c7-1b61b160c96f",
+      "name": "Step 3 note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        160
+      ]
+    }
+  ],
+  "connections": {
+    "Run manually": {
+      "main": [
+        [
+          {
+            "node": "Set your product idea",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set your product idea": {
+      "main": [
+        [
+          {
+            "node": "Build one call per platform",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build one call per platform": {
+      "main": [
+        [
+          {
+            "node": "Search each platform on Apify",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search each platform on Apify": {
+      "main": [
+        [
+          {
+            "node": "Build price comparison table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {}
+}

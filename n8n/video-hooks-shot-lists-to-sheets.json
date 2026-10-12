@@ -1,0 +1,320 @@
+{
+  "name": "Analyze TikTok and YouTube video hooks and shot lists in Google Sheets with Apify",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Run manually",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3dfbaaa6-4004-462d-bbed-31a2c9488f42",
+              "name": "urls",
+              "value": "={{ [\n  'https://www.tiktok.com/@okc.dad/video/7682492258666515726',\n  'https://www.tiktok.com/@herbi.app/video/7693531155685215521'\n] }}",
+              "type": "array"
+            },
+            {
+              "id": "554bc9d6-2954-4526-acd8-1a1bc5f940e0",
+              "name": "outputLanguage",
+              "value": "English",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Set videos to analyze",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.apify.com/v2/acts/tubetext~video-breakdown-ai/run-sync-get-dataset-items?timeout=300",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ urls: $json.urls, outputLanguage: $json.outputLanguage, includeTranscript: true }) }}",
+        "options": {
+          "timeout": 310000
+        }
+      },
+      "name": "Analyze videos with Apify",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        520,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "509d6350-c0db-4872-90bf-f2f307808cd1",
+              "name": "date",
+              "value": "={{ $now.toFormat('yyyy-MM-dd') }}",
+              "type": "string"
+            },
+            {
+              "id": "65e40346-cb9a-4b91-9111-4bebcf1f425d",
+              "name": "url",
+              "value": "={{ $json.url || $json.input }}",
+              "type": "string"
+            },
+            {
+              "id": "7bc48527-0a84-4fbc-8185-0283a9da551c",
+              "name": "author",
+              "value": "={{ $json.author || \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "03cfb8a4-41fa-4828-a5cb-653873ad70ee",
+              "name": "views",
+              "value": "={{ $json.playCount ?? \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "b80a0a9b-96ad-41e4-a433-e6c2ce597e6d",
+              "name": "engagementRate",
+              "value": "={{ $json.engagementRate ?? \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "637feb8c-ea3c-4e36-b633-f1e9ab8aaba6",
+              "name": "format",
+              "value": "={{ $json.format || \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "f82bfbd4-0d3d-4e97-942c-71bd15c49a38",
+              "name": "tone",
+              "value": "={{ $json.tone || \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "c46d76c4-0745-4c8a-9cdb-ced47ce0ef9e",
+              "name": "hook",
+              "value": "={{ $json.hook?.text || \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "3cfaab27-8eb3-4e66-b6f4-0e8805f8cb37",
+              "name": "summary",
+              "value": "={{ $json.summary || $json.error || \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "b4fcc137-af06-4346-add2-859906f4a158",
+              "name": "structure",
+              "value": "={{ ($json.structure || []).map(b => b.beat + ' (' + b.start + '-' + b.end + 's): ' + b.description).join('\\n') }}",
+              "type": "string"
+            },
+            {
+              "id": "601f9dda-3aed-4651-9b0d-2708b7a755bc",
+              "name": "keyMoments",
+              "value": "={{ ($json.keyMoments || []).map(m => m.time + 's: ' + m.what).join('\\n') }}",
+              "type": "string"
+            },
+            {
+              "id": "b12a2000-fa33-40c4-8aac-3ef32202de0a",
+              "name": "shotCount",
+              "value": "={{ $json.shotCount ?? \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "8b386b20-43c8-46da-b672-372ea666dfc8",
+              "name": "cta",
+              "value": "={{ $json.cta || \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "6e8fe8c5-ba01-4a68-9952-4c050245c7e6",
+              "name": "audience",
+              "value": "={{ $json.audience || \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "e7fe793f-8f79-4d14-a509-7813d4be66d3",
+              "name": "onScreenText",
+              "value": "={{ $json.onScreenText || \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "00196ee7-e22e-4080-becd-c4cb15f1627b",
+              "name": "transcript",
+              "value": "={{ $json.transcript || \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "36f572a1-2ec2-4738-b291-ed9e243e93a1",
+              "name": "status",
+              "value": "={{ $json.status }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Format one row per video",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        800,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "mode": "url",
+          "value": ""
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "name",
+          "value": "Sheet1"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": []
+        },
+        "options": {}
+      },
+      "name": "Append rows to Google Sheet",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1080,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Analyze TikTok and YouTube video hooks and shot lists in Google Sheets\n\nPaste links to short videos (your own, competitors' or ads you want to learn from) and get a structured breakdown per video in a Google Sheet: the hook, format, tone, beat-by-beat structure, key moments, CTA, on-screen text and full transcript, plus views and engagement rate.\n\n### Who it's for\nUGC and performance marketers, ad buyers, agencies and creators who study what makes videos work and want a swipe file without watching every clip.\n\n### How it works\n1. **Set videos to analyze** holds TikTok, YouTube or Shorts links and the output language.\n2. **Analyze videos with Apify** sends them to the Video Breakdown AI Actor. It samples frames, reads captions (or transcribes speech with Whisper) and returns a structured analysis.\n3. **Format one row per video** turns lists into readable text cells.\n4. **Append rows to Google Sheet** adds one row per video.\n\n### Setup steps (5 min)\n1. Create an Apify account and copy your API token (Console > Settings > API & Integrations).\n2. In **Analyze videos with Apify** create a *Header Auth* credential: Name `Authorization`, Value `Bearer <your token>`.\n3. Create a Google Sheet with these headers in row 1: `date, url, author, views, engagementRate, format, tone, hook, summary, structure, keyMoments, shotCount, cta, audience, onScreenText, transcript, status`. Paste its URL into **Append rows to Google Sheet** and connect Google.\n4. Replace the example links and run. Keep each run to about 10 short videos so it finishes within the 5-minute sync limit.\n\n### Customization\nSwap the manual trigger for a schedule or form, or send the hooks to an AI model to draft new scripts.\n\n*Disclosure: I maintain the Apify Actor used here.*",
+        "height": 920,
+        "width": 620
+      },
+      "name": "Template overview",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -680,
+        -460
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## 1. Add your videos\nTikTok, YouTube or Shorts links. Set the output language.",
+        "height": 360,
+        "width": 440,
+        "color": 7
+      },
+      "name": "Step 1 note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        -180
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## 2. AI breakdown\nOne Apify call for all videos. Add your Apify token as a Header Auth credential.",
+        "height": 360,
+        "width": 240,
+        "color": 7
+      },
+      "name": "Step 2 note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        440,
+        -180
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## 3. Save to Google Sheets\nOne row per video. Row 1 of your sheet needs the headers listed in the overview.",
+        "height": 360,
+        "width": 500,
+        "color": 7
+      },
+      "name": "Step 3 note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        720,
+        -180
+      ]
+    }
+  ],
+  "connections": {
+    "Run manually": {
+      "main": [
+        [
+          {
+            "node": "Set videos to analyze",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set videos to analyze": {
+      "main": [
+        [
+          {
+            "node": "Analyze videos with Apify",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze videos with Apify": {
+      "main": [
+        [
+          {
+            "node": "Format one row per video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format one row per video": {
+      "main": [
+        [
+          {
+            "node": "Append rows to Google Sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {}
+}
