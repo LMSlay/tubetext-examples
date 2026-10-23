@@ -27,6 +27,8 @@ Every Actor can be used as a tool through the [Apify MCP server](https://mcp.api
 
 ## All Actors
 
+To choose tools by task before trying an example, browse the [TubeText product catalog](https://tubetext.dev/catalog/).
+
 **Transcripts**
 
 - [YouTube Transcript Scraper](https://apify.com/tubetext/youtube-transcript-fast) – videos, Shorts, playlists and whole channels to text; Whisper AI when there are no captions
