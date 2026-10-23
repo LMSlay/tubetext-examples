@@ -37,3 +37,7 @@ Keep both run IDs and dataset IDs. The first dataset contains discovery results;
 The recipe runs two Actors. Review [Bilibili Scraper pricing](https://apify.com/tubetext/bilibili-scraper/pricing) and [Bilibili Video Transcript pricing](https://apify.com/tubetext/bilibili-video-transcript/pricing), including any upcoming rate changes. Discovery results, transcription minutes and optional English summaries are separate charge events; Actor Start and other applicable fees may also apply. A waived result fee does not make an entire run free. Review a separate run-spend limit for each Actor before execution.
 
 The existing script is a short chaining example, not a production ingestion pipeline: it does not schedule monitoring, deduplicate across runs, persist transcripts locally or validate their quality. The walkthrough above was checked against the public listings and existing recipe on 2026-10-23; it is not a new live-run benchmark or a claim about customer outcomes.
+
+## Spreadsheet walkthrough
+
+- [Export Google Play competitor reviews to CSV and compare complaint themes](google-play-competitor-reviews-csv.md): Android public-review sampling, review-only exports, a fictional comparison worksheet and current event-cost math. Includes the official Play Console route for apps you manage.
