@@ -25,6 +25,19 @@ Use [Google Ads Transparency Video](https://apify.com/tubetext/google-ads-transp
 
 _Checked against the public README, input schema and effective event pricing on 2026-10-23. This is an inventory/selection checklist, not a new executable workflow or live-run benchmark._
 
+## YouTube Shorts research: metadata first, captions second
+
+Use [YouTube Shorts Scraper](https://apify.com/tubetext/youtube-shorts-scraper) when you know the channels and need a small comparison shortlist before reading transcripts.
+
+1. **Define the sample.** Put known channels in `channels`, set `includeTranscript: false`, and choose `sinceDate` plus a small `maxShortsPerChannel` (default 30; maximum 5,000). Channels are listed newest first. A date window with a result cap is a sample, not every Short published in that period or a platform-wide trend search.
+2. **Keep comparable evidence.** Save the input, run/dataset IDs and complete export. Retain `shortId`, `url`, `channelId`, `publishedAt`, `scrapedAt` and reported views, likes and comments when available; separate unsuccessful rows. Missing likes are not zero. Compare videos with similar publication ages rather than treating older videos' larger lifetime totals as better performance.
+3. **Choose collection or refresh deliberately.** `onlyNew: true` skips Shorts previously delivered to this account, remembered per channel. It is not a refresh of their counts or confirmation that your spreadsheet saved them. Deduplicate your shortlist by `shortId`; retain separate `scrapedAt` observations if refreshing metrics with `onlyNew: false`. Archive exports before downstream processing.
+4. **Read only the selected captions.** Send chosen links through `shortsUrls` with `includeTranscript: true` and `onlyNew: false` for an explicit second pass. Check `transcriptStatus`: `no_captions` means no usable caption text, not proof that nobody spoke. Captions are uploaded or auto-generated YouTube text, not an AI creative assessment. For deeper review of selected reference videos, use the existing [video creative research guide](https://tubetext.dev/video-creative-research/).
+
+**Budget both passes:** current Free-plan rates are $0.003 per delivered Short, plus $0.002 per delivered transcript. Reprocessing a Short for captions can charge the Short event again. Each run also has Actor Start at $0.00005 per GB of memory, minimum one event, even with no delivered results. Review [current pricing](https://apify.com/tubetext/youtube-shorts-scraper/pricing) and a separate spend limit for each run.
+
+_Reviewed against public inputs, README and effective pricing on 2026-10-23; no Actor run was performed. This checklist discovers only available public data, not complete coverage, algorithmic reach or guaranteed growth._
+
 ## Bilibili keyword research: videos, transcripts and English summaries
 
 Use this recipe when you have a research topic but do not yet have the Bilibili video links. It connects two different jobs:
