@@ -8,6 +8,8 @@ Several TubeText Actors take a `datasetId` input: pass the default dataset of an
 | [Product photos → China suppliers](products_to_suppliers.py) | [AliExpress Search Scraper](https://apify.com/tubetext/aliexpress-search-scraper) or [TikTok Shop Product Scraper](https://apify.com/tubetext/tiktok-shop-product-scraper) | [Alibaba & Yiwu Supplier Finder by Image](https://apify.com/tubetext/alibaba-yiwu-image-search) with `datasetId` |
 | Brand → video ads → AI teardown | [Video Ad Analyzer](https://apify.com/tubetext/video-ad-analyzer) with `metaBrands` (it fetches the ads from the Meta Ad Library itself) | – |
 
+Before using the product-photo supplier recipe, review the [TikTok Shop sourcing guide](https://tubetext.dev/tiktok-shop-sourcing/) for its variant, currency and supplier-verification checklist.
+
 ## Bilibili keyword research: videos, transcripts and English summaries
 
 Use this recipe when you have a research topic but do not yet have the Bilibili video links. It connects two different jobs:
