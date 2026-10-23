@@ -21,6 +21,24 @@ These templates use built-in n8n nodes, not a TubeText community-node package. I
 - **Hooks and shot lists:** [Video Breakdown AI](https://apify.com/tubetext/video-breakdown-ai). Review the video list, output language and Google Sheets headers. AI-generated interpretations are not evidence that an ad performs well.
 - **Sourcing comparison:** [Taobao/Tmall](https://apify.com/tubetext/taobao-tmall-scraper), [AliExpress](https://apify.com/tubetext/aliexpress-search-scraper) and optional [TikTok Shop](https://apify.com/tubetext/tiktok-shop-product-scraper). Review per-platform limits and the manually supplied CNY-per-USD rate. The sample rate is not a live exchange rate; listing prices are not a landed-cost or profit estimate.
 
+### Channel statistics: weekly YouTube competitor tracking in Google Sheets
+
+Use [the existing weekly channel-stats template](youtube-channel-stats-weekly-to-sheets.json) when you want dated snapshots of a known YouTube channel list, such as your own channel and a few competitors. It calls [YouTube Channel Analytics](https://apify.com/tubetext/youtube-channel-analytics), then appends one row per returned channel to your chosen Google Sheet. It does not discover competitors, backfill past weeks, or calculate week-over-week changes for you.
+
+**What this template requests:** the latest 10 uploads, Social Blade data enabled, and daily history disabled. The Actor's default Social Blade setting is off, but the shipped template explicitly sends `includeSocialBlade: true`. That optional section has its own event price when returned, in addition to channel and Actor Start charges. If you only need YouTube statistics, change this request field to `false` before running. Check the Actor's [Pricing tab](https://apify.com/tubetext/youtube-channel-analytics/pricing) for current prices.
+
+**What reaches the sheet:** date, channel, handle, subscribers, total views, video count, average and median views for the recent uploads, uploads per week, days since last upload, 14-day views gained, Social Blade grade, estimated monthly earnings, and status. The date is the workflow execution date, not a historical snapshot date. Social Blade fields can be blank when unavailable. The earnings range is a third-party estimate, not the creator's actual income; a grade is not proof of sponsorship fit or campaign performance. Subscriber counts are rounded by the source, so small changes may not be visible.
+
+Before enabling the Monday-at-8am schedule:
+- Replace the example channels and review the n8n workflow time zone.
+- Set the Google Sheet destination and the exact column headers listed in the template's overview.
+- Inspect `status` and missing values before using the rows in a client report. Unlike the transcript and hooks templates below, this channel-statistics template does not have a separate success/error branch.
+- Keep the original Apify dataset if you need fields omitted by the sheet formatter. The append step does not deduplicate rows, so rerunning for the same date can add duplicates.
+
+**YouTube Channel Analytics or Social Blade Scraper?** Choose Channel Analytics for YouTube-specific recent-upload performance and upload frequency, with optional Social Blade enrichment. Choose [Social Blade Scraper](https://apify.com/tubetext/socialblade-scraper) for Social Blade creator statistics across YouTube, TikTok, Instagram and Twitch, or its supported top-100 lists. The weekly template above calls Channel Analytics only; it does not call Social Blade Scraper. Check each source's coverage before comparing creators, since daily history and available metrics differ by platform.
+
+This is a documentation review of the existing template and public Actor schema. No live Actor run, Google Sheets write or end-to-end validation was performed for this section.
+
 ### Transcripts: output and failure handling
 
 **Classify Apify results** checks each dataset row, then **Successful content?** separates content from diagnostics. Only rows with `status: ok`, a nonempty transcript string and no error/errorCode reach **Format transcript fields**. Its successful output still exposes `status, url, title, author, source, wordCount, transcript`; error messages are never substituted for transcript text. Connect downstream LLMs, vector stores or content Sheets only to this successful formatter.
