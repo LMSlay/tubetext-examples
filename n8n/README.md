@@ -43,6 +43,8 @@ This is a documentation review of the existing template and public Actor schema.
 
 Use [the existing sourcing template](sourcing-price-table-taobao-aliexpress-tiktokshop.json) to explore listings for a product idea. It searches Taobao/Tmall and AliExpress independently, then adds TikTok Shop only when you supply product or category links. It does not match identical SKUs across marketplaces or calculate resale margin.
 
+Before treating two listings as comparable, use the [variant, order unit, currency, MOQ and destination checklist](https://tubetext.dev/tiktok-shop-sourcing/#compare) to review the original offers.
+
 Before comparing the output:
 - Review Taobao's translated query (`searchedAs`) and the original listings. Similar keywords can return different products, sizes or bundles.
 - Compare prices within the same reported currency. No currency conversion is performed; `cnyPerUsd` remains in the input for compatibility but is deprecated and ignored. Check shipping, duties, taxes, quantity and destination separately.
