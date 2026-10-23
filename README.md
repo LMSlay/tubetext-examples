@@ -22,6 +22,17 @@ The response is the dataset as JSON: one item per video, product, ad, review and
 - [`recipes/`](recipes/) – multi-Actor pipelines (chain one Actor's dataset into another).
 - [`n8n/`](n8n/) – importable n8n workflows (HTTP Request node, no community nodes needed).
 
+## Find an n8n workflow by task
+
+Use the existing templates below with n8n's built-in nodes. Start with the [setup, cost and validation notes](n8n/README.md); downloads are free, but Actor execution and connected services can incur charges.
+
+- **Turn YouTube or TikTok links into text:** [transcript workflow](n8n/youtube-tiktok-transcripts.json). Successful content and diagnostics have separate outputs; connect downstream summarization only to the successful content path.
+- **Build a video-hook research sheet:** [hooks and shot-list workflow](n8n/video-hooks-shot-lists-to-sheets.json). Review the structured analysis in your own Google Sheet; AI interpretations are not evidence of ad performance.
+- **Track a known YouTube channel list weekly:** [channel statistics workflow](n8n/youtube-channel-stats-weekly-to-sheets.json). Configure the Sheet, time zone and optional Social Blade costs before enabling the schedule.
+- **Compare marketplace sourcing leads:** [Taobao, AliExpress and TikTok Shop workflow](n8n/sourcing-price-table-taobao-aliexpress-tiktokshop.json). Prices are grouped by reported currency, not a combined landed-cost or profit estimate.
+
+These are maintained downloads in this repository, not a claim of official n8n marketplace approval or live end-to-end validation. See the linked notes for each template's verification scope.
+
 ## AI agents (ChatGPT, Claude, Cursor)
 Every Actor can be used as a tool through the [Apify MCP server](https://mcp.apify.com), for example `https://mcp.apify.com/?tools=tubetext/youtube-transcript-fast`. There is also a [Dify plugin](https://marketplace.dify.ai/plugin/tubetext/tubetext).
 
