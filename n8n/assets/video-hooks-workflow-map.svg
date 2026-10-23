@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 650" role="img" aria-labelledby="title desc">
+<title id="title">Video hooks to Google Sheets: source connection map</title>
+<desc id="desc">Run manually, Set videos to analyze, Analyze videos with Apify, Classify Apify results, and Successful content form the input path. The true branch formats one row per video and appends rows to Google Sheet. The false branch ends at Errors - inspect before retry. This is an illustration, not a screenshot or live run.</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#52647a"/></marker></defs>
+<rect width="1100" height="650" fill="#f7f9fc"/>
+<g font-family="Arial, sans-serif" fill="#172a40">
+<text x="40" y="48" font-size="28" font-weight="700">Video hooks → Google Sheets</text>
+<text x="40" y="80" font-size="17">Illustrative map of the exported JSON · Not an n8n screenshot or live run</text>
+<rect x="40" y="120" width="340" height="56" rx="9" fill="#fff" stroke="#8ca1b8"/>
+<text x="210.0" y="154" text-anchor="middle" font-size="18">Run manually</text>
+<rect x="40" y="208" width="340" height="56" rx="9" fill="#fff" stroke="#8ca1b8"/>
+<text x="210.0" y="242" text-anchor="middle" font-size="18">Set videos to analyze</text>
+<rect x="40" y="296" width="340" height="56" rx="9" fill="#fff" stroke="#8ca1b8"/>
+<text x="210.0" y="330" text-anchor="middle" font-size="18">Analyze videos with Apify</text>
+<rect x="40" y="384" width="340" height="56" rx="9" fill="#fff" stroke="#8ca1b8"/>
+<text x="210.0" y="418" text-anchor="middle" font-size="18">Classify Apify results</text>
+<rect x="40" y="472" width="340" height="56" rx="9" fill="#fff" stroke="#8ca1b8"/>
+<text x="210.0" y="506" text-anchor="middle" font-size="18">Successful content?</text>
+<path d="M210,176 V206" fill="none" stroke="#52647a" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M210,264 V294" fill="none" stroke="#52647a" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M210,352 V382" fill="none" stroke="#52647a" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M210,440 V470" fill="none" stroke="#52647a" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="630" y="318" width="420" height="56" rx="9" fill="#e8f3ff" stroke="#8ca1b8"/>
+<text x="840.0" y="352" text-anchor="middle" font-size="18">Format one row per video</text>
+<rect x="630" y="406" width="420" height="56" rx="9" fill="#e8f3ff" stroke="#8ca1b8"/>
+<text x="840.0" y="440" text-anchor="middle" font-size="18">Append rows to Google Sheet</text>
+<rect x="630" y="530" width="420" height="56" rx="9" fill="#fff2df" stroke="#8ca1b8"/>
+<text x="840.0" y="564" text-anchor="middle" font-size="18">Errors - inspect before retry</text>
+<path d="M380,500 H500 V346 H628" fill="none" stroke="#52647a" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M840,374 V404" fill="none" stroke="#52647a" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M380,500 H500 V558 H628" fill="none" stroke="#52647a" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="514" y="370" font-size="17">true</text>
+<text x="514" y="550" font-size="17">false</text>
+<text x="40" y="609" font-size="16">Eight connected nodes shown; sticky notes omitted. No automatic retry path is connected.</text>
+</g></svg>
