@@ -41,7 +41,8 @@ Every Actor can be used as a tool through the [Apify MCP server](https://mcp.api
 **Video & ad analysis**
 
 - [Video Breakdown AI](https://apify.com/tubetext/video-breakdown-ai) – hook analysis, shot list, cut pacing, products shown and script of any TikTok, Reel or YouTube video
-- [Video Ad Analyzer](https://apify.com/tubetext/video-ad-analyzer) – competitors' YouTube video ads by brand or domain (Google Ads Transparency), torn down by AI
+- [Video Ad Analyzer](https://apify.com/tubetext/video-ad-analyzer) – analyze competitor Meta and YouTube video ads from brands, domains or existing video links. Get hooks, offers, CTAs, scripts and shot breakdowns.
+  Before running: review the [public output sample](https://apify.com/tubetext/video-ad-analyzer), then follow the [review-first creative brief walkthrough](https://dev.to/lmslay/turn-competitor-video-ads-into-an-original-creative-brief-with-source-links-27if).
 - [Meta Ad Library Video Ads](https://apify.com/tubetext/meta-ad-library-videos) – any brand's Facebook and Instagram video ads with video URL, ad copy, CTA and landing page
 
 **Social, apps & trends**
