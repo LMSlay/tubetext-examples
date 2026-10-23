@@ -10,6 +10,21 @@ Several TubeText Actors take a `datasetId` input: pass the default dataset of an
 
 Before using the product-photo supplier recipe, review the [TikTok Shop sourcing guide](https://tubetext.dev/tiktok-shop-sourcing/) for its variant, currency and supplier-verification checklist.
 
+## Google Ads discovery: source-linked video inventory
+
+Use [Google Ads Transparency Video](https://apify.com/tubetext/google-ads-transparency-video) to find video ads before deciding which deserve creative analysis.
+
+1. **Choose the search scope.** Supply an advertiser domain, `AR…` ID, brand or advertiser-page link. Save that input alongside your region, date filters and collection date. Defaults are `region: anywhere`, 20 videos per advertiser, video stats on, transcripts off and `onlyNew: false`. Start with a small limit.
+2. **Build an inventory, not a scorecard.** Retain the run/dataset IDs and original export. For each usable row, keep `advertiserName`, `matchedAs`, `creativeIds`, `adUrl`, `videoHost`, `youtubeUrl` or `videoStreamUrl`, `firstShown` and `lastShown` when present. Your saved domain/ID is input context, not a promised output field. One video row may group several creative IDs.
+3. **Review before selecting.** Inspect `status`, open the original ad and video, and keep missing/unplayable/error rows separate. Google-hosted rows have an HLS stream rather than a YouTube URL. Captions are optional and available only for YouTube videos that have them.
+4. **Analyze only the shortlist.** Follow the existing [video creative research guide](https://tubetext.dev/video-creative-research/) for supported analysis inputs and a source-linked brief. Discovery alone does not provide hook scoring or prove spend, conversions or ROAS.
+
+**Interpret dates carefully:** `firstShown`/`lastShown` are worldwide dates; region/date filters use Google's regional dates. Text/image ads and unresolved video creatives are excluded, so this is not complete advertiser coverage. Video views are not ad impressions.
+
+**Costs:** at review, Free-plan rates were $0.003 per delivered video ad and +$0.002 per delivered caption transcript. Actor Start is $0.00005 per event (one per GB of memory, minimum one). A waived result fee does not make the run free. Check [current pricing](https://apify.com/tubetext/google-ads-transparency-video/pricing), plan discounts and a run-spend limit; downstream analysis costs are separate.
+
+_Checked against the public README, input schema and effective event pricing on 2026-10-23. This is an inventory/selection checklist, not a new executable workflow or live-run benchmark._
+
 ## Bilibili keyword research: videos, transcripts and English summaries
 
 Use this recipe when you have a research topic but do not yet have the Bilibili video links. It connects two different jobs:
