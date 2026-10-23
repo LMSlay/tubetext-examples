@@ -49,7 +49,24 @@
         "specifyBody": "json",
         "jsonBody": "={{ JSON.stringify({ urls: $json.urls, outputLanguage: $json.outputLanguage, includeTranscript: true }) }}",
         "options": {
-          "timeout": 310000
+          "timeout": 310000,
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": true,
+              "responseFormat": "text",
+              "outputPropertyName": "body"
+            }
+          }
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/json,text/*;q=0.99"
+            }
+          ]
         }
       },
       "name": "Analyze videos with Apify",
@@ -58,7 +75,9 @@
       "position": [
         520,
         0
-      ]
+      ],
+      "onError": "continueRegularOutput",
+      "alwaysOutputData": true
     },
     {
       "parameters": {
@@ -115,7 +134,7 @@
             {
               "id": "3cfaab27-8eb3-4e66-b6f4-0e8805f8cb37",
               "name": "summary",
-              "value": "={{ $json.summary || $json.error || \"\" }}",
+              "value": "={{ $json.summary }}",
               "type": "string"
             },
             {
@@ -174,7 +193,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        800,
+        1280,
         0
       ]
     },
@@ -203,14 +222,14 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.5,
       "position": [
-        1080,
+        1560,
         0
       ]
     },
     {
       "parameters": {
-        "content": "## Analyze TikTok and YouTube video hooks and shot lists in Google Sheets\n\nPaste links to short videos (your own, competitors' or ads you want to learn from) and get a structured breakdown per video in a Google Sheet: the hook, format, tone, beat-by-beat structure, key moments, CTA, on-screen text and full transcript, plus views and engagement rate.\n\n### Who it's for\nUGC and performance marketers, ad buyers, agencies and creators who study what makes videos work and want a swipe file without watching every clip.\n\n### How it works\n1. **Set videos to analyze** holds TikTok, YouTube or Shorts links and the output language.\n2. **Analyze videos with Apify** sends them to the Video Breakdown AI Actor. It samples frames, reads captions (or transcribes speech with Whisper) and returns a structured analysis.\n3. **Format one row per video** turns lists into readable text cells.\n4. **Append rows to Google Sheet** adds one row per video.\n\n### Setup steps (5 min)\n1. Create an Apify account and copy your API token (Console > Settings > API & Integrations).\n2. In **Analyze videos with Apify** create a *Header Auth* credential: Name `Authorization`, Value `Bearer <your token>`.\n3. Create a Google Sheet with these headers in row 1: `date, url, author, views, engagementRate, format, tone, hook, summary, structure, keyMoments, shotCount, cta, audience, onScreenText, transcript, status`. Paste its URL into **Append rows to Google Sheet** and connect Google.\n4. Replace the example links and run. Keep each run to about 10 short videos so it finishes within the 5-minute sync limit.\n\n### Customization\nSwap the manual trigger for a schedule or form, or send the hooks to an AI model to draft new scripts.\n\n*Disclosure: I maintain the Apify Actor used here.*",
-        "height": 920,
+        "content": "## Analyze TikTok and YouTube video hooks and shot lists in Google Sheets\n\nPaste links to short videos (your own, competitors' or ads you want to learn from) and get a structured breakdown per video in a Google Sheet: the hook, format, tone, beat-by-beat structure, key moments, CTA, on-screen text and full transcript, plus views and engagement rate.\n\n### Who it's for\nUGC and performance marketers, ad buyers, agencies and creators who study what makes videos work and want a swipe file without watching every clip.\n\n### How it works\n1. **Set videos to analyze** holds TikTok, YouTube or Shorts links and the output language.\n2. **Analyze videos with Apify** sends them to the Video Breakdown AI Actor. It samples frames, reads captions (or transcribes speech with Whisper) and returns a structured analysis.\n3. **Classify Apify results** checks each row. **Successful content?** allows only `status: ok`, nonempty summary text and no error into **Format one row per video**.\n4. **Append rows to Google Sheet** receives successful analysis rows. Failures, no-speech statuses, timeouts and missing/unlinked results go only to **Errors - inspect before retry**. A successful visual analysis may have no transcript.\n\n### Setup steps (5 min)\n1. Create an Apify account and copy your API token (Console > Settings > API & Integrations).\n2. In **Analyze videos with Apify** create a *Header Auth* credential: Name `Authorization`, Value `Bearer <your token>`.\n3. Create a Google Sheet with these headers in row 1: `date, url, author, views, engagementRate, format, tone, hook, summary, structure, keyMoments, shotCount, cta, audience, onScreenText, transcript, status`. Paste its URL into **Append rows to Google Sheet** and connect Google.\n4. Replace the example links and run. Start with a small batch; no batch size guarantees completion within the 300-second sync limit.\n\n### Customization\nConnect only the successful formatted rows to a downstream AI model. Keep the error output separate. The template has no downstream LLM node.\n\n### Costs and timeouts\nThe existing Video Breakdown AI request and includeTranscript setting are unchanged; execution can incur Actor and AI/service charges. Result-fee waivers do not waive Actor Start or platform costs. Downstream model costs are separate. A sync timeout does not prove the Actor stopped or was free. Inspect the existing run/dataset before retrying; Completed responses are retained at the HTTP node before workflow JSON parsing. Header recovery IDs and HTTP status survive malformed JSON; no raw body or headers are copied into diagnostics. If a connection fails before n8n exposes a response, recovery metadata may be unavailable.\n\n*Disclosure: I maintain the Apify Actor used here.*",
+        "height": 1340,
         "width": 620
       },
       "name": "Template overview",
@@ -253,9 +272,9 @@
     },
     {
       "parameters": {
-        "content": "## 3. Save to Google Sheets\nOne row per video. Row 1 of your sheet needs the headers listed in the overview.",
-        "height": 360,
-        "width": 500,
+        "content": "## 3. Separate content from diagnostics\nOnly the true branch reaches the existing content formatter and Google Sheets. Connect downstream LLMs here only.\n\nThe false branch ends at **Errors - inspect before retry**. Inspect status/error and available run/dataset IDs. Never treat an error message as transcript or summary, or blindly rerun a timeout.",
+        "height": 560,
+        "width": 1100,
         "color": 7
       },
       "name": "Step 3 note",
@@ -264,6 +283,62 @@
       "position": [
         720,
         -180
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const contentField = \"summary\";\nconst requestNodeName = \"Set videos to analyze\";\nconst defaultActor = \"tubetext~video-breakdown-ai\";\n// contentField, requestNodeName and defaultActor are fixed by this template.\n// No IO: classify complete HTTP responses and keep failed data out of content fields.\nconst output = [];\nconst object = value => value !== null && typeof value === 'object' && !Array.isArray(value);\nconst text = value => typeof value === 'string' && value.trim().length > 0;\nconst presentError = value => value !== undefined && value !== null && value !== false &&\n  (typeof value !== 'string' || text(value));\nconst errorMessage = value => text(value) ? value : object(value) && text(value.message) ? value.message : '';\nconst timeout = value => /timed[ -]?out|timeout|ETIMEDOUT|ESOCKETTIMEDOUT|ECONNABORTED/i.test(value);\nconst scalar = value => value == null || typeof value === 'string' || typeof value === 'boolean' ||\n  (typeof value === 'number' && Number.isFinite(value));\nconst timeValue = value => (typeof value === 'number' || text(value)) && Number.isFinite(Number(value));\nconst recovery = (...sources) => {\n  const result = {};\n  for (const source of sources) if (object(source)) {\n    for (const key of ['runId', 'actorRunId', 'datasetId', 'defaultDatasetId', 'runStatus']) {\n      if (text(source[key])) result[key] = source[key];\n    }\n    if (typeof source.charged === 'boolean') result.charged = source.charged;\n  }\n  return result;\n};\nfor (let responseIndex = 0; responseIndex < $input.all().length; responseIndex++) {\n  let response = $input.all()[responseIndex].json || {};\n  let responseParseError = false;\n  // The HTTP node retains text plus headers/status before parsing. Keep its output intact.\n  if (typeof response.body === 'string') {\n    try { response = { ...response, body: JSON.parse(response.body) }; }\n    catch { responseParseError = true; }\n  }\n  let context = {}, contextUnavailable = false;\n  try { context = $(requestNodeName).itemMatching(responseIndex).json || {}; }\n  catch { contextUnavailable = true; } // Never borrow another batch's input or recovery IDs.\n  const requestUrls = [...new Set((context.input?.urls || context.urls || []).filter(text))];\n  const responseHeaders = response.headers || response.error?.response?.headers || response.error?.headers;\n  const headers = Object.fromEntries(Object.entries(object(responseHeaders) ? responseHeaders : {}).map(([k, v]) => [k.toLowerCase(), v]));\n  const statusValue = response.statusCode ?? response.error?.statusCode ?? response.error?.httpCode ??\n    response.error?.response?.statusCode ?? response.error?.response?.status;\n  const httpStatus = Number.isInteger(statusValue) ? statusValue :\n    typeof statusValue === 'string' && /^\\d{3}$/.test(statusValue) ? Number(statusValue) : undefined;\n  const headerIds = {\n    runId: headers['x-apify-actor-run-id'],\n    datasetId: headers['x-apify-default-dataset-id'] || headers['x-apify-dataset-id'],\n  };\n  const base = {\n    ...recovery(headerIds, response, response.error?.response?.body, response.error, response.body, response.body?.error),\n    actor: context.actor || defaultActor, responseIndex, requestUrls,\n    ...(text(context.platform) ? { platform: context.platform } : {}),\n    ...(contextUnavailable ? { contextUnavailable: true } : {}),\n    ...(httpStatus !== undefined ? { httpStatus } : {}),\n    ...(responseParseError ? { responseParseError: 'invalid_json' } : {}),\n  };\n  const emit = json => output.push({ json, pairedItem: { item: responseIndex } });\n  const fail = (status, code, message, row = {}, resultIndex) => {\n    const json = { ...base, ...recovery(row, row.error), _routeToContent: false,\n      status, errorCode: text(row.errorCode) ? row.errorCode : code,\n      error: errorMessage(row.error) || message };\n    for (const key of ['input', 'url', 'videoId']) if (text(row[key])) json[key] = row[key];\n    if (text(row.status)) json.actorStatus = row.status;\n    if (resultIndex !== undefined) json.resultIndex = resultIndex;\n    emit(json); // Explicit whitelist: no transcript, summary, headers or arbitrary error objects.\n  };\n  if (presentError(response.error)) {\n    const message = errorMessage(response.error) || 'HTTP request failed; inspect the existing run before retrying.';\n    const code = text(response.error?.code) ? response.error.code : 'request_failed';\n    const isTimeout = timeout(message) || timeout(code) || httpStatus === 408 || httpStatus === 504;\n    fail(isTimeout ? 'timeout' : 'transport_error', code, message);\n    continue;\n  }\n  if (httpStatus === undefined || httpStatus < 200 || httpStatus >= 300) {\n    const isTimeout = httpStatus === 408 || httpStatus === 504;\n    fail(isTimeout ? 'timeout' : 'http_error', isTimeout ? 'request_timeout' : 'http_error',\n      errorMessage(response.body?.error) || `HTTP ${httpStatus ?? 'status missing'}; inspect the existing run before retrying.`);\n    continue;\n  }\n  if (responseParseError) {\n    fail('invalid_result', 'invalid_json', 'Response body is not valid JSON. Inspect the retained HTTP response and existing run before retrying.');\n    continue;\n  }\n  if (!Array.isArray(response.body)) {\n    fail('invalid_result', 'invalid_dataset_response', 'Expected a dataset array; no content was forwarded.');\n    continue;\n  }\n  if (!response.body.length) {\n    fail('missing_result', 'empty_dataset', 'The response contained no dataset rows. Inspect the existing run before retrying.');\n    continue;\n  }\n  const linked = new Set();\n  response.body.forEach((row, resultIndex) => {\n    if (!object(row)) { fail('invalid_result', 'invalid_row', 'Dataset row is not an object.', {}, resultIndex); return; }\n    for (const key of ['input', 'url']) if (text(row[key])) linked.add(row[key]);\n    if (row.status !== 'ok' || presentError(row.error) || presentError(row.errorCode)) {\n      fail(text(row.status) && row.status !== 'ok' ? row.status : 'error', 'actor_result_failed',\n        `Actor result is not successful (status: ${text(row.status) ? row.status : 'missing'}).`, row, resultIndex);\n      return;\n    }\n    if (!text(row[contentField])) {\n      fail('missing_result', 'missing_content', `Successful status without a nonempty ${contentField} string.`, row, resultIndex);\n      return;\n    }\n    const validBeat = value => object(value) && typeof value.beat === 'string' &&\n      typeof value.description === 'string' && timeValue(value.start) && timeValue(value.end);\n    const validMoment = value => object(value) && typeof value.what === 'string' && timeValue(value.time);\n    if (contentField === 'summary' && [['structure', validBeat], ['keyMoments', validMoment]].some(([key, valid]) =>\n      row[key] != null && (!Array.isArray(row[key]) || !row[key].every(valid)))) {\n      fail('invalid_result', 'invalid_analysis_lists', 'Analysis lists have an invalid shape.', row, resultIndex);\n      return;\n    }\n    // Validate every value read by the existing Set formatters before casting/concatenating.\n    // Keep printable legacy values (including numeric time strings) unchanged.\n    const fields = contentField === 'summary' ? [row.url || row.input, row.author || '',\n      row.playCount ?? '', row.engagementRate ?? '', row.format || '', row.tone || '', row.hook?.text || '',\n      row.shotCount ?? '', row.cta || '', row.audience || '', row.onScreenText || '', row.transcript || ''] :\n      [row.url || row.input, row.title || row.description || '', row.channelName || row.authorUsername || '', row.source || '', row.wordCount || 0];\n    if (!fields.every(scalar) || (contentField === 'transcript' && !Number.isFinite(Number(row.wordCount || 0)))) {\n      fail('invalid_result', 'invalid_formatter_fields', 'Content metadata has an invalid shape for the formatter.', row, resultIndex);\n      return;\n    }\n    emit({ ...row, _routeToContent: true }); // The success formatter retains the original public fields.\n  });\n  for (const url of requestUrls) if (!linked.has(url)) {\n    fail('missing_result', 'input_result_not_linked',\n      'No returned row could be linked to this input. Check aliases and the existing dataset before retrying.', { input: url, url });\n  }\n}\nreturn output;\n"
+      },
+      "name": "Classify Apify results",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        760,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "content-is-safe",
+              "leftValue": "={{ $json._routeToContent }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "name": "Successful content?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1020,
+        0
+      ]
+    },
+    {
+      "parameters": {},
+      "name": "Errors - inspect before retry",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1280,
+        300
       ]
     }
   ],
@@ -294,7 +369,7 @@
       "main": [
         [
           {
-            "node": "Format one row per video",
+            "node": "Classify Apify results",
             "type": "main",
             "index": 0
           }
@@ -306,6 +381,35 @@
         [
           {
             "node": "Append rows to Google Sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Classify Apify results": {
+      "main": [
+        [
+          {
+            "node": "Successful content?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Successful content?": {
+      "main": [
+        [
+          {
+            "node": "Format one row per video",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Errors - inspect before retry",
             "type": "main",
             "index": 0
           }
