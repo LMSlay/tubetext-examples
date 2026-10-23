@@ -19,7 +19,7 @@ These templates use built-in n8n nodes, not a TubeText community-node package. I
 - **Transcripts:** [YouTube Transcript](https://apify.com/tubetext/youtube-transcript-fast) and [TikTok Transcript](https://apify.com/tubetext/tiktok-transcript). Supply a small list of supported links. The shipped YouTube request explicitly enables `aiFallback: true`, which can add per-minute transcription charges. For captions-only YouTube processing, change that field to `false` in **Split links by platform** before running. This does not change TikTok's settings.
 - **Channel statistics:** [YouTube Channel Analytics](https://apify.com/tubetext/youtube-channel-analytics). Review the channel list, schedule/time zone and Google Sheets destination before activating recurring execution.
 - **Hooks and shot lists:** [Video Breakdown AI](https://apify.com/tubetext/video-breakdown-ai). Review the video list, output language and Google Sheets headers. AI-generated interpretations are not evidence that an ad performs well.
-- **Sourcing comparison:** [Taobao/Tmall](https://apify.com/tubetext/taobao-tmall-scraper), [AliExpress](https://apify.com/tubetext/aliexpress-search-scraper) and optional [TikTok Shop](https://apify.com/tubetext/tiktok-shop-product-scraper). Review per-platform limits and the manually supplied CNY-per-USD rate. The sample rate is not a live exchange rate; listing prices are not a landed-cost or profit estimate.
+- **Sourcing comparison:** [Taobao/Tmall](https://apify.com/tubetext/taobao-tmall-scraper), [AliExpress](https://apify.com/tubetext/aliexpress-search-scraper) and optional [TikTok Shop](https://apify.com/tubetext/tiktok-shop-product-scraper). Review per-platform limits. Prices stay in their reported currencies; this template performs no currency conversion. Listing prices are not landed-cost or profit estimates.
 
 ### Channel statistics: weekly YouTube competitor tracking in Google Sheets
 
@@ -45,14 +45,14 @@ Use [the existing sourcing template](sourcing-price-table-taobao-aliexpress-tikt
 
 Before comparing the output:
 - Review Taobao's translated query (`searchedAs`) and the original listings. Similar keywords can return different products, sizes or bundles.
-- Set your own current `cnyPerUsd` rate. The shipped 7.1 is a sample, not a live exchange rate. Check shipping, duties, taxes, quantity and destination separately.
-- Treat `soldCount` as a source-specific signal, not a common sales period or verified demand forecast. The template's top-five ordering uses whichever values are present.
-- Inspect the original datasets. The formatter skips non-`ok` rows and rows whose platform it cannot recognize; a missing platform does not mean zero results or zero demand. Unlike the transcript workflow, it has no separate diagnostic branch.
-- A missing price can appear as `0.00 USD` in the top-five text. Check the original price before acting; do not interpret that display as a free product.
+- Compare prices within the same reported currency. No currency conversion is performed; `cnyPerUsd` remains in the input for compatibility but is deprecated and ignored. Check shipping, duties, taxes, quantity and destination separately.
+- Treat `soldCount` as a source-specific signal, not a common sales period or verified demand forecast. Top-five listings are ordered by reported sales, with input order retained for ties; prices in different currencies are not ranked against each other.
+- Inspect the original datasets. The formatter skips non-`ok` or error-marked rows and rows whose platform it cannot recognize; a missing platform does not mean zero results or zero demand. Unlike the transcript workflow, it has no separate diagnostic branch.
+- Missing or invalid prices are shown as `Price unavailable`; an actual numeric zero is retained. Unknown currencies are labeled explicitly and excluded from comparable price statistics. Check the original listing and price before acting.
 
 For a separate image-based supplier search, the existing [product photos to suppliers recipe](../recipes/products_to_suppliers.py) chains AliExpress results into [Alibaba & Yiwu Supplier Finder](https://apify.com/tubetext/alibaba-yiwu-image-search). Similar-looking listings are sourcing leads, not verified manufacturers or proof of identical goods. That Python recipe is separate from this n8n template.
 
-This section documents the existing workflow; it does not change its code or establish live end-to-end reliability.
+The sourcing price formatter has local mock validation as described below. This does not establish live upstream, authentication, billing or end-to-end reliability.
 
 ### Transcripts: output and failure handling
 
@@ -79,3 +79,13 @@ The templates use Apify's synchronous dataset endpoint, which has a [300-second 
 For the YouTube API background and troubleshooting, see the [existing tutorial](https://dev.to/lmslay/youtube-transcript-api-requestblocked-on-your-server-what-actually-works-in-2026-1pak). For downstream archive/replay concepts, see the separate [offline incremental-RAG example](../python/youtube_incremental_rag/); it is a Python example, not an n8n workflow.
 
 _Last reviewed: 2026-10-23. The two transcript and hooks/shot-list templates passed 10 independent local mock scenarios in n8n 2.4.6 and 96 offline assertions. This covers local success/error routing and recovery metadata from completed malformed-JSON responses. It does not validate real Apify/AI/Google Sheets services, authentication, billing, partial-response disconnects, the actual 310-second client timeout, or other/production n8n versions. The channel-statistics and sourcing templates were not included in that verification._
+
+### Sourcing price output compatibility
+
+The sourcing template keeps one row per platform and the existing `platform` (string), `products` (number), `minPriceUSD` / `medianPriceUSD` (nullable numbers), and `top5` (string) fields. **The USD fields now summarize confirmed USD listings only.** They no longer convert CNY or assume missing currencies mean USD. Consumers relying on the old converted or inferred USD semantics must migrate. `cnyPerUsd` remains in the input with its existing default but is deprecated and ignored.
+
+`priceGroups` adds one entry per recognized currency, with `currency`, `products`, `pricedProducts`, `minPrice`, and `medianPrice`. `priceCNY` explicitly identifies CNY. Other prices require a recognized ISO currency code in `currency`; omitted or unsupported codes are excluded from comparable statistics. `missingPriceProducts` and `unknownCurrencyProducts` expose incomplete listings and may overlap. `products` counts successful listings, including incomplete prices; error-marked listings are excluded.
+
+Only finite nonnegative numeric prices qualify: zero is valid; missing, null, empty, string, negative and nonfinite values are unavailable. Even-sample medians average the two middle values. Top listings use reported sales with stable input order for ties; no cross-currency price ranking occurs. `top5` shows native currency or an explicit unknown/unavailable label. No combined cross-platform price or profit estimate is produced.
+
+Sourcing validation: five independent local mock scenarios passed in n8n 2.4.6, and 21 offline regression assertions were replayed. These checks cover the local price formatter, request count and documented currency/empty-value behavior. They do not validate real upstream Actor responses, authentication, billing, Google Sheets or other/production n8n versions.

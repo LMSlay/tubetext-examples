@@ -107,7 +107,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// Turn all returned products into one comparison row per platform (prices in USD).\nconst s = $('Set your product idea').first().json;\nconst cnyPerUsd = Number(s.cnyPerUsd) || 7.1;\nconst platformOf = it => /taobao|tmall/i.test(it.url || '') ? 'Taobao/Tmall'\n  : /aliexpress/i.test(it.url || '') ? 'AliExpress'\n  : /tiktok/i.test(it.url || '') ? 'TikTok Shop' : null;\nconst usd = it => it.priceCNY != null ? it.priceCNY / cnyPerUsd : (typeof it.price === 'number' ? it.price : null);\nconst groups = {};\nfor (const { json: it } of $input.all()) {\n  const p = platformOf(it);\n  if (!p || it.status !== 'ok') continue;\n  (groups[p] = groups[p] || []).push(it);\n}\nreturn Object.entries(groups).map(([platform, items]) => {\n  const prices = items.map(usd).filter(x => x != null).sort((a, b) => a - b);\n  const top = [...items].sort((a, b) => (b.soldCount || 0) - (a.soldCount || 0) || (usd(a) || 0) - (usd(b) || 0)).slice(0, 5);\n  return { json: {\n    platform,\n    products: items.length,\n    minPriceUSD: prices.length ? +prices[0].toFixed(2) : null,\n    medianPriceUSD: prices.length ? +prices[Math.floor(prices.length / 2)].toFixed(2) : null,\n    top5: top.map(it => `${(usd(it) ?? 0).toFixed(2)} USD | ${it.soldCount ? it.soldCount + ' sold | ' : ''}${(it.title || '').slice(0, 60)} | ${it.url}`).join('\\n'),\n  }};\n});"
+        "jsCode": "// Native currencies only: no FX conversion or cross-currency price ranking.\n// Keep one row per platform; legacy USD fields summarize confirmed USD only.\nconst knownCurrencies = new Set(Intl.supportedValuesOf('currency'));\nconst platformOf = it => /taobao|tmall/i.test(it.url || '') ? 'Taobao/Tmall'\n  : /aliexpress/i.test(it.url || '') ? 'AliExpress'\n  : /tiktok/i.test(it.url || '') ? 'TikTok Shop' : null;\nconst amount = x => typeof x === 'number' && Number.isFinite(x) && x >= 0 ? x : null;\nconst quote = it => {\n  if (Object.prototype.hasOwnProperty.call(it, 'priceCNY')) return {value: amount(it.priceCNY), currency: 'CNY'};\n  const code = typeof it.currency === 'string' ? it.currency.trim().toUpperCase() : '';\n  return {value: amount(it.price), currency: knownCurrencies.has(code) ? code : null};\n};\nconst round = n => Number(n.toFixed(2));\nconst stats = items => {\n  const prices = items.map(x => x.quote.value).filter(x => x !== null).sort((a,b) => a-b);\n  const m = Math.floor(prices.length / 2);\n  return {products: items.length, pricedProducts: prices.length,\n    minPrice: prices.length ? round(prices[0]) : null,\n    medianPrice: prices.length ? round(prices.length % 2 ? prices[m] : prices[m-1] / 2 + prices[m] / 2) : null};\n};\nconst groups = new Map();\nfor (const {json: it} of $input.all()) {\n  if (!it || it.status !== 'ok' || it.error || it.errorCode) continue;\n  const platform = platformOf(it);\n  if (!platform) continue;\n  if (!groups.has(platform)) groups.set(platform, []);\n  groups.get(platform).push({item: it, quote: quote(it)});\n}\nreturn [...groups].map(([platform, items]) => {\n  const currencies = [...new Set(items.map(x => x.quote.currency).filter(Boolean))].sort();\n  const priceGroups = currencies.map(currency => ({currency, ...stats(items.filter(x => x.quote.currency === currency))}));\n  const usd = priceGroups.find(x => x.currency === 'USD');\n  const sold = it => amount(it.soldCount) ?? 0;\n  // Stable order for equal sales counts avoids ranking different currencies by face value.\n  const top = [...items].sort((a,b) => sold(b.item)-sold(a.item)).slice(0,5);\n  return {json: {platform, products: items.length,\n    minPriceUSD: usd?.minPrice ?? null, medianPriceUSD: usd?.medianPrice ?? null,\n    top5: top.map(({item: it, quote: q}) => {\n      const price = q.value === null ? 'Price unavailable' : `${q.value.toFixed(2)} ${q.currency || '(currency unknown)'}`;\n      return `${price} | ${sold(it) ? sold(it) + ' sold | ' : ''}${String(it.title || '').slice(0,60)} | ${it.url}`;\n    }).join('\\n'),\n    priceGroups,\n    missingPriceProducts: items.filter(x => x.quote.value === null).length,\n    unknownCurrencyProducts: items.filter(x => x.quote.currency === null).length,\n  }};\n});\n"
       },
       "id": "2852dd88-7af3-4f67-ab91-e079e5cb9ea8",
       "name": "Build price comparison table",
@@ -120,7 +120,7 @@
     },
     {
       "parameters": {
-        "content": "## Product sourcing price table: Taobao vs AliExpress vs TikTok Shop\n\nType a product idea and get one row per platform: number of products, lowest and median price in USD, and the top 5 listings (by items sold where the platform shows it).\n\n### How it works\n1. **Taobao/Tmall** – source prices in CNY (converted with your rate)\n2. **AliExpress** – same keyword, sorted by orders, new-shopper deals skipped\n3. **TikTok Shop** (optional) – paste a category or product links; TikTok Shop has no keyword search\n\n### Setup\n- Create an Apify account and add your API token as a **Header Auth** credential (`Authorization: Bearer <token>`) on the HTTP Request node.\n- Edit **Set your product idea**.\n\n### Cost\nPay-per-result Apify Actors by TubeText Labs; 20 products per platform cost roughly $0.10–0.20 per run.",
+        "content": "## Product sourcing prices by currency\n\nCompare one row per platform, with lowest and median listing prices grouped by explicit currency. Taobao/Tmall stays in CNY; no exchange conversion is performed.\n\nAliExpress uses your keyword; optional TikTok Shop uses pasted category or product links. Top five listings are ranked by reported sales, not by prices in different currencies. Missing prices are shown as unavailable.\n\n### Setup\nCreate an Apify Header Auth credential (`Authorization: Bearer <token>`) on the HTTP Request node, then edit **Set your product idea**.\n\n### Cost\nReview each linked Actor’s current pricing and limits. Platform/start fees may apply even without delivered results. Listing prices exclude landed costs.",
         "height": 520,
         "width": 420
       },
@@ -135,7 +135,7 @@
     },
     {
       "parameters": {
-        "content": "## 1. Your product idea\nEnglish keyword for AliExpress, Chinese or English for Taobao, optional TikTok Shop links, and your CNY→USD rate.",
+        "content": "## 1. Your product idea\nEnglish keyword for AliExpress, Chinese or English for Taobao, optional TikTok Shop links. The legacy cnyPerUsd input is retained for compatibility but ignored; no FX conversion occurs.",
         "height": 360,
         "width": 420,
         "color": 7
@@ -151,7 +151,7 @@
     },
     {
       "parameters": {
-        "content": "## 2. Search each platform\nOne Apify call per platform. Failed items are free.",
+        "content": "## 2. Search each platform\nOne Apify call per selected platform. Error-marked rows are excluded from price statistics. Check Actor pricing for applicable start and result fees.",
         "height": 360,
         "width": 420,
         "color": 7
@@ -167,7 +167,7 @@
     },
     {
       "parameters": {
-        "content": "## 3. Compare\nOne row per platform. Send it to Google Sheets, Slack or email by adding a node here.",
+        "content": "## 3. Compare\nOne row per platform with priceGroups by native currency. Legacy USD fields cover confirmed USD only. Unknown currencies are displayed but excluded from comparable price statistics.",
         "height": 360,
         "width": 300,
         "color": 7
