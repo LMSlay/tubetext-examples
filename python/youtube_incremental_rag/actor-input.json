@@ -1,0 +1,13 @@
+{
+  "urls": [
+    "https://www.youtube.com/@3blue1brown"
+  ],
+  "channelSort": "newest",
+  "maxVideosPerSource": 20,
+  "skipAlreadyScraped": true,
+  "aiFallback": false,
+  "includeSegments": true,
+  "includeTimestampedText": true,
+  "includeSrt": true,
+  "chunkWords": 0
+}

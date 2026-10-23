@@ -1,0 +1,45 @@
+[
+  {
+    "status": "ok",
+    "videoId": "SYNTHETIC01",
+    "source": "captions",
+    "language": "en",
+    "transcript": "Alpha Beta",
+    "segments": [
+      {
+        "start": 0.2,
+        "duration": 1,
+        "text": "Alpha"
+      },
+      {
+        "start": 2,
+        "duration": 0.5,
+        "text": "Beta"
+      }
+    ]
+  },
+  {
+    "status": "no_transcript",
+    "videoId": "SYNTHETIC02",
+    "error": "Synthetic missing captions fixture"
+  },
+  {
+    "status": "ok",
+    "videoId": "SYNTHETIC01",
+    "source": "captions",
+    "language": "en",
+    "transcript": "Alpha Beta",
+    "segments": [
+      {
+        "start": 0.2,
+        "duration": 1,
+        "text": "Alpha"
+      },
+      {
+        "start": 2,
+        "duration": 0.5,
+        "text": "Beta"
+      }
+    ]
+  }
+]
