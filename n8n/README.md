@@ -39,6 +39,21 @@ Before enabling the Monday-at-8am schedule:
 
 This is a documentation review of the existing template and public Actor schema. No live Actor run, Google Sheets write or end-to-end validation was performed for this section.
 
+### Product sourcing: Taobao, AliExpress and TikTok Shop shortlists
+
+Use [the existing sourcing template](sourcing-price-table-taobao-aliexpress-tiktokshop.json) to explore listings for a product idea. It searches Taobao/Tmall and AliExpress independently, then adds TikTok Shop only when you supply product or category links. It does not match identical SKUs across marketplaces or calculate resale margin.
+
+Before comparing the output:
+- Review Taobao's translated query (`searchedAs`) and the original listings. Similar keywords can return different products, sizes or bundles.
+- Set your own current `cnyPerUsd` rate. The shipped 7.1 is a sample, not a live exchange rate. Check shipping, duties, taxes, quantity and destination separately.
+- Treat `soldCount` as a source-specific signal, not a common sales period or verified demand forecast. The template's top-five ordering uses whichever values are present.
+- Inspect the original datasets. The formatter skips non-`ok` rows and rows whose platform it cannot recognize; a missing platform does not mean zero results or zero demand. Unlike the transcript workflow, it has no separate diagnostic branch.
+- A missing price can appear as `0.00 USD` in the top-five text. Check the original price before acting; do not interpret that display as a free product.
+
+For a separate image-based supplier search, the existing [product photos to suppliers recipe](../recipes/products_to_suppliers.py) chains AliExpress results into [Alibaba & Yiwu Supplier Finder](https://apify.com/tubetext/alibaba-yiwu-image-search). Similar-looking listings are sourcing leads, not verified manufacturers or proof of identical goods. That Python recipe is separate from this n8n template.
+
+This section documents the existing workflow; it does not change its code or establish live end-to-end reliability.
+
 ### Transcripts: output and failure handling
 
 **Classify Apify results** checks each dataset row, then **Successful content?** separates content from diagnostics. Only rows with `status: ok`, a nonempty transcript string and no error/errorCode reach **Format transcript fields**. Its successful output still exposes `status, url, title, author, source, wordCount, transcript`; error messages are never substituted for transcript text. Connect downstream LLMs, vector stores or content Sheets only to this successful formatter.
