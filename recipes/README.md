@@ -10,6 +10,8 @@ Several TubeText Actors take a `datasetId` input: pass the default dataset of an
 
 Before using the product-photo supplier recipe, review the [TikTok Shop sourcing guide](https://tubetext.dev/tiktok-shop-sourcing/) for its variant, currency and supplier-verification checklist.
 
+See [YouTube and TikTok comment sample boundaries: static sample-interpretation guide](youtube-tiktok-comment-sample-boundaries.md).
+
 ## Google Ads discovery: source-linked video inventory
 
 Use [Google Ads Transparency Video](https://apify.com/tubetext/google-ads-transparency-video) to find video ads before deciding which deserve creative analysis.
