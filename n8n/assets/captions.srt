@@ -1,0 +1,31 @@
+1
+00:00:00,000 --> 00:00:12,000
+This template is designed to turn video links into rows for human review. This is not an execution demonstration.
+
+2
+00:00:12,000 --> 00:00:28,000
+Replace the example links. Create the documented column headers. Keep API tokens in credentials, not exported JSON.
+
+3
+00:00:28,000 --> 00:00:42,000
+The source requests transcript inclusion. A valid visual analysis can still have no transcript.
+
+4
+00:00:42,000 --> 00:00:58,000
+Only admitted rows reach the content formatter. A successful HTTP response alone is not a successful analysis.
+
+5
+00:00:58,000 --> 00:01:12,000
+The shipped document ID is blank and the sheet name is Sheet1. Select your destination; no Sheet was connected for this video.
+
+6
+00:01:12,000 --> 00:01:28,000
+Failures, malformed results and timeouts go to inspection, not content rows. Check available run / dataset IDs before retrying.
+
+7
+00:01:28,000 --> 00:01:42,000
+A waived result fee does not waive every cost. A timeout does not prove execution stopped. Blind retries can repeat costs.
+
+8
+00:01:42,000 --> 00:01:54,000
+No import, Actor call, AI call or Google Sheets write was performed to make this walkthrough. Full sources and headers accompany the transcript.
