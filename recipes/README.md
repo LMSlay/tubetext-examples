@@ -12,6 +12,11 @@ Before using the product-photo supplier recipe, review the [TikTok Shop sourcing
 
 See [YouTube and TikTok comment sample boundaries: static sample-interpretation guide](youtube-tiktok-comment-sample-boundaries.md).
 
+## Read an existing transcript locally
+
+- [Make a reading copy without losing the timed source](transcript-reading-copy-without-losing-source.md): keep the original JSON or timed transcript, then use the free browser-local cleaner for a separate plain-text reading copy. No new Actor run is needed to clean text you already have.
+- [Open the TubeText tools directory](https://tools.tubetext.dev/) for the local transcript cleaner and other small file utilities. Paid Apify Actors are separate services.
+
 ## Google Ads discovery: source-linked video inventory
 
 Use [Google Ads Transparency Video](https://apify.com/tubetext/google-ads-transparency-video) to find video ads before deciding which deserve creative analysis.
