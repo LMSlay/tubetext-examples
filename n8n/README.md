@@ -72,6 +72,8 @@ The final formatting step also does not retain timestamp segments, SRT, language
 
 For a visual orientation before import, see the [illustrated connection map](video-hooks-workflow-map.md), including the separate content and diagnostic paths.
 
+For manual comparison after reviewing successful analyses, use the [hook-comparison rubric](https://tubetext.dev/video-hook-comparison/): choose the same opening interval, retain source-linked observations, and separate creative hypotheses from measured performance.
+
 The creative-analysis template uses the same separate branches. Only `status: ok` with a nonempty summary and no error/errorCode reaches **Format one row per video** and **Append rows to Google Sheet**. Successful field names and formatting stay unchanged; an error message never becomes a summary. Explicit no-speech/failure statuses go to the error output. A valid visual analysis with a summary may have no transcript and is still usable. Malformed analysis lists are routed for inspection instead of stopping their successful siblings. Any optional downstream LLM belongs on the successful content path, never on the error output.
 
 These routing changes add no Actor calls, polling, automatic retries or AI nodes. The shipped YouTube `aiFallback: true`, TikTok request, and video analysis `includeTranscript: true` are unchanged. Blocking failed content can avoid downstream processing of errors, but no live cost saving has been measured. Actor/service costs already incurred are not refunded by workflow routing.
