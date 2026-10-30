@@ -4,6 +4,8 @@ A useful competitor review export should answer a question: which problems keep 
 
 This Android-only workflow produces a review CSV and a small comparison sheet. Maintained by TubeText, the author of the Google Play review tool used below. This guide was prepared with AI assistance from the linked documentation; it is not a report of a new test run.
 
+For a 70-second silent walkthrough of sample scope, see the [MP4](assets/google-play-review-scope/google-play-review-scope.mp4), [SRT captions](assets/google-play-review-scope/google-play-review-scope.srt) and [readable transcript](assets/google-play-review-scope/google-play-review-scope-transcript.md). Every scene is a static illustration or fictional worksheet, not a recorded Actor run.
+
 ## Choose the right source
 
 If you manage the app in Play Console, start with **Download reports → Reviews** and choose the app, year and month. Google's [monthly CSV export](https://support.google.com/googleplay/android-developer/answer/6135870?p=stats_export) is available in your developer account's private reporting bucket. The [official Reviews API](https://developers.google.com/android-publisher/reply-to-reviews) is also for authorized apps and returns reviews created or modified within the last week.
