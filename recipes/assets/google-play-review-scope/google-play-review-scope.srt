@@ -1,0 +1,29 @@
+1
+00:00:00,000 --> 00:00:10,000
+Static fictional illustration, not an Actor run.
+8 of 40 retained review rows is not 8 of 40 customers.
+
+2
+00:00:10,000 --> 00:00:22,000
+Play Console exports are for authorized apps.
+Public competitor reviews need the public-data route.
+
+3
+00:00:22,000 --> 00:00:34,000
+Keep Raw untouched; retain review rows with text.
+Exclude errors, skipped rows, summaries and AI reports.
+
+4
+00:00:34,000 --> 00:00:46,000
+Fictional login mentions: A, 8 / 40 = 20%; B, 5 / 50 = 10%.
+Read each review; count it at most once per theme.
+
+5
+00:00:46,000 --> 00:00:58,000
+Keep missing dates and versions missing.
+Align date windows, recalculate, and report exclusions.
+
+6
+00:00:58,000 --> 00:01:10,000
+These shares describe samples, not the whole customer base.
+Read the linked recipe. No Actor run was performed.
