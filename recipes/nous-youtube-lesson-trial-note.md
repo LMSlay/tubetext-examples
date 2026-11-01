@@ -6,7 +6,7 @@
 
 [Nous issue #508](https://github.com/immagiov4/Nous/issues/508) asks for a usage-priced YouTube research path covering both video search and transcripts, with candidate metadata, caption kinds, timestamped segments, and diagnosable failures.
 
-The repository maintainer, `immagiov4`, subsequently [reported a small, three-run trial](https://github.com/immagiov4/Nous/issues/508#issuecomment-6550685698) of `tubetext/youtube-transcript-fast` on the **Apify Free plan**. Each reported run combined one search with captions for the six highest-relevance videos, requested Italian before English, included timestamped segments, and used `aiFallback: false`.
+The repository maintainer, `immagiov4`, subsequently [reported a small, three-run trial](https://github.com/immagiov4/Nous/issues/508#issuecomment-6550685698) of [tubetext/youtube-transcript-fast](https://apify.com/tubetext/youtube-transcript-fast) on the **Apify Free plan**. Each reported run combined one search with captions for the six highest-relevance videos, requested Italian before English, included timestamped segments, and used `aiFallback: false`.
 
 ## What the maintainer reported
 
