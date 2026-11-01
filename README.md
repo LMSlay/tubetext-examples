@@ -1,6 +1,6 @@
 # TubeText examples
 
-Code examples, n8n workflows and multi-step recipes for the [TubeText Labs](https://apify.com/tubetext) Actors on Apify (23 pay-per-result Actors for video, social and e-commerce data).
+Code examples, n8n workflows and multi-step recipes for the [TubeText Labs](https://apify.com/tubetext) Actors on Apify.
 
 *Maintained by the author of these Actors.* Apify's [free plan](https://apify.com/pricing) includes $5 of monthly usage credit, no credit card needed. This is account credit, not a separate free tier for each Actor. Check each Actor's Pricing tab before running for current event prices and any applicable start or platform charges.
 
