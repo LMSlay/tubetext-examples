@@ -8,7 +8,7 @@ For a 70-second silent walkthrough of sample scope, see the [MP4](assets/google-
 
 ## Choose the right source
 
-If you manage the app in Play Console, start with **Download reports → Reviews** and choose the app, year and month. Google's [monthly CSV export](https://support.google.com/googleplay/android-developer/answer/6135870?p=stats_export) is available in your developer account's private reporting bucket. The [official Reviews API](https://developers.google.com/android-publisher/reply-to-reviews) is also for authorized apps and returns reviews created or modified within the last week.
+If you manage the app in Play Console, follow Google's current report-download path, **Manage account → Play apps reports → Reviews**, then choose the app, year and month (help-page navigation checked on 2 November 2026; not a signed-in UI test). Google's [monthly CSV export](https://support.google.com/googleplay/android-developer/answer/6135870?p=stats_export) is available in your developer account's private reporting bucket. The [official Reviews API](https://developers.google.com/android-publisher/reply-to-reviews) is also for authorized apps and returns reviews created or modified within the last week.
 
 For public competitor reviews, that account export is not the route. You can maintain a script using [google-play-scraper](https://github.com/JoMingyu/google-play-scraper), whose documentation covers country/language settings and pagination, or use a hosted export tool. The following steps use [TubeText's Google Play reviews Actor](https://apify.com/tubetext/google-play-reviews-ai).
 
