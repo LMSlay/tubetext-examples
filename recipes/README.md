@@ -12,6 +12,8 @@ Before using the product-photo supplier recipe, review the [TikTok Shop sourcing
 
 See [YouTube and TikTok comment sample boundaries: static sample-interpretation guide](youtube-tiktok-comment-sample-boundaries.md).
 
+See [One source frame, two display moments: a static creative handoff example](opening-frame-and-post-playback-handoff.md).
+
 ## Read an existing transcript locally
 
 - [Make a reading copy without losing the timed source](transcript-reading-copy-without-losing-source.md): keep the original JSON or timed transcript, then use the free browser-local cleaner for a separate plain-text reading copy. No new Actor run is needed to clean text you already have.
