@@ -82,3 +82,5 @@ The existing script is a short chaining example, not a production ingestion pipe
 - [Export Google Play competitor reviews to CSV and compare complaint themes](google-play-competitor-reviews-csv.md): Android public-review sampling, review-only exports, a fictional comparison worksheet and current event-cost math. Includes the official Play Console route for apps you manage.
 
 - [Reconcile two review snapshots for a weekly brief](google-play-weekly-snapshot-reconciliation.md): a fictional, manual row-by-row exercise separating repeated records, changed text, first-seen dates and unresolved evidence. No new collection or live run is claimed.
+
+- [One Reel, three kinds of text: an AI reading handoff](instagram-reel-first-text-evidence-handoff.md): a fictional manual exercise separating a post caption, speech and screen text, with a source-status card and expected answer. No transcription or model run is claimed.
