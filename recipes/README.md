@@ -14,6 +14,8 @@ See [YouTube and TikTok comment sample boundaries: static sample-interpretation 
 
 See [One source frame, two display moments: a static creative handoff example](opening-frame-and-post-playback-handoff.md).
 
+See [Review each video claim before summarizing the whole clip](video-claim-evidence-review.md): a fictional four-question worksheet separating sufficient evidence, insufficient support and work not yet assessed. It is not a fact-checking or product benchmark.
+
 ## Read an existing transcript locally
 
 - [Make a reading copy without losing the timed source](transcript-reading-copy-without-losing-source.md): keep the original JSON or timed transcript, then use the free browser-local cleaner for a separate plain-text reading copy. No new Actor run is needed to clean text you already have.
