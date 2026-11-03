@@ -81,6 +81,8 @@ The existing script is a short chaining example, not a production ingestion pipe
 
 ## Spreadsheet walkthrough
 
+- [Label creator earnings estimates before sharing](public-earnings-estimate-source-checklist.md): separate public ranges, owner estimates, finalized earnings and payment or receipt evidence. Includes an invented source note; no financial account or Actor run was checked.
+
 - [Export Google Play competitor reviews to CSV and compare complaint themes](google-play-competitor-reviews-csv.md): Android public-review sampling, review-only exports, a fictional comparison worksheet and current event-cost math. Includes the official Play Console route for apps you manage.
 
 - [Reconcile two review snapshots for a weekly brief](google-play-weekly-snapshot-reconciliation.md): a fictional, manual row-by-row exercise separating repeated records, changed text, first-seen dates and unresolved evidence. No new collection or live run is claimed.
