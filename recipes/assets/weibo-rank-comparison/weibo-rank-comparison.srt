@@ -1,0 +1,29 @@
+1
+00:00:00,000 --> 00:00:08,000
+How far did a Weibo topic move?
+Compare two exports from the same board.
+
+2
+00:00:08,000 --> 00:00:14,000
+In these fictional snapshots, City bike
+festival is rank 8 at 09:00 UTC.
+
+3
+00:00:14,000 --> 00:00:20,000
+At 10:00 UTC it's rank 3: up five places.
+Rank 0 is pinned, not a new number one.
+
+4
+00:00:20,000 --> 00:00:25,000
+Missing in the export means not observed.
+It might be outside your export limit.
+
+5
+00:00:25,000 --> 00:00:30,000
+An error row means the snapshot
+was unavailable, not that interest fell.
+
+6
+00:00:30,000 --> 00:00:38,000
+Use the same board and limit. Keep the
+original title, rank and both fetchedAt times.

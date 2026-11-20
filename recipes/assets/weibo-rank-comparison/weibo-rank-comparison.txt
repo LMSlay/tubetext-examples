@@ -1,0 +1,18 @@
+Compare two Weibo hot-search exports
+Duration: 38 seconds. Silent visual tutorial with a separate caption file.
+All example topics, times and ranks are fictional. No live Actor run.
+
+00:00–00:08 — Use two snapshots of the same board.
+00:08–00:20 — “City bike festival” is #8 at 09:00 UTC and #3 at 10:00 UTC:
+up five places in one hour. “Festival advisory” is rank 0 (pinned),
+not the most popular organic result. The slides show excerpts, not full exports.
+00:20–00:30 — If a topic does not appear in a successful export, mark it
+“not observed”; it may be below your export limit. For a failed board
+(status: "error"), mark the snapshot unavailable and skip the comparison.
+00:30–00:38 — Use the same board and export limit. Match the original topic
+title; check ambiguity manually. Retain both fetchedAt timestamps with the
+ranks. Do not compare raw heat scores across platforms.
+
+Field reference: https://apify.com/tubetext/china-trending-topics
+Existing Weibo-only preset:
+https://apify.com/tubetext/china-trending-topics/examples/weibo-hot-search-scraper
