@@ -60,6 +60,7 @@ To choose tools by task before trying an example, browse the [TubeText product c
 - [YouTube Channel Analytics](https://apify.com/tubetext/youtube-channel-analytics) – subscribers, recent video performance, Social Blade grade, ranks and estimated earnings
 - [Bilibili Scraper](https://apify.com/tubetext/bilibili-scraper) – Bilibili (B站) keyword search, popular board, top-100 ranking, video stats and creator (UP主) followers – no login
 - [China Trending Topics](https://apify.com/tubetext/china-trending-topics) – Douyin, Weibo, Baidu, Toutiao and Bilibili hot-search boards in one run, in English – plus an optional AI briefing on why topics trend
+  - [Compare two Weibo hot-search exports](recipes/assets/weibo-rank-comparison/) (38-second fictional demo, captions, and transcript)
 - [WeChat Article Scraper](https://apify.com/tubetext/wechat-articles-scraper) – WeChat 公众号 articles by keyword or link: full text, English titles and optional English summaries
 - [Google Play Reviews + AI Insights](https://apify.com/tubetext/google-play-reviews-ai) – Android app reviews by star rating, country and language, plus an AI report of complaints and praise
 
