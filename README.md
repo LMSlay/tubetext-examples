@@ -28,6 +28,7 @@ The response is the dataset as JSON: one item per video, product, ad, review and
 - [YouTube + TikTok links → transcript text](n8n/youtube-tiktok-transcripts.json) · Separate successful content and diagnostics.
 - [Video hooks + shot lists → Google Sheets](n8n/video-hooks-shot-lists-to-sheets.json) · AI analysis, not proof of ad performance.
 - [Known YouTube channels → weekly statistics sheet](n8n/youtube-channel-stats-weekly-to-sheets.json) · Review schedule, destination and optional Social Blade costs.
+  - [November 16 counting change: TV co-views and weekly public totals](recipes/youtube-weekly-views-co-viewing.md)
 - [Taobao + AliExpress + TikTok Shop → sourcing shortlist](n8n/sourcing-price-table-taobao-aliexpress-tiktokshop.json) · Native-currency prices, not landed cost or profit.
 
 ## AI agents (ChatGPT, Claude, Cursor)
