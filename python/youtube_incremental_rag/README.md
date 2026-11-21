@@ -54,7 +54,7 @@ Keep one durable database for this example. A multi-worker or hosted vector-data
 
 ## 4. Budget the whole workflow
 
-At the checked Free-plan price, 20 delivered caption transcripts have a transcript-event subtotal of US$0.08. Actor Start is separate: US$0.00005 per memory-based event, with at least one event per start. Use the live [pricing page](https://apify.com/tubetext/youtube-transcript-fast/pricing) and your run settings rather than treating US$0.08 as an all-in cap.
+At the Free-plan rate checked on 21 November 2026, 20 billed Transcript events at US$2.50 per 1,000 have a US$0.05 transcript subtotal. Actor Start is listed separately at US$0.00005 per event. Check the live [pricing page](https://apify.com/tubetext/youtube-transcript-fast/pricing) and the run's charged event counts; US$0.05 is not an all-in cap.
 
 An unsuccessful video can avoid a transcript event while the run still incurs its start charge. Storage, scheduling/integration services and any embedding or model services you add can also have separate costs. Review the maximum-charge setting before scheduling; a customer charge limit is not a universal cap on every external service.
 
