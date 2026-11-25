@@ -49,6 +49,7 @@ To choose tools by task before trying an example, browse the [TubeText product c
 - [Bilibili Video Transcript](https://apify.com/tubetext/bilibili-video-transcript) – Bilibili (B站) videos to text with Whisper AI, plus optional English summaries
 - [Podcast Transcript](https://apify.com/tubetext/podcast-transcript) – podcast RSS feeds and Apple Podcasts episodes to text with Whisper AI
   - [Keep long podcast transcripts from disappearing in spreadsheets](recipes/podcast-transcript-spreadsheet-cell-limits.md)
+  - [Check podcast timestamps after an audio edit or ad insertion](recipes/podcast-transcript-audio-version-timestamps.md) (fictional worked example, no Actor run)
 
 **Video & ad analysis**
 
