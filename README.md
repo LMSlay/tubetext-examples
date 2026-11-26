@@ -50,6 +50,7 @@ To choose tools by task before trying an example, browse the [TubeText product c
 - [Podcast Transcript](https://apify.com/tubetext/podcast-transcript) – podcast RSS feeds and Apple Podcasts episodes to text with Whisper AI
   - [Keep long podcast transcripts from disappearing in spreadsheets](recipes/podcast-transcript-spreadsheet-cell-limits.md)
   - [Check podcast timestamps after an audio edit or ad insertion](recipes/podcast-transcript-audio-version-timestamps.md) (fictional worked example, no Actor run)
+  - [Check which YouTube video matches revised podcast RSS audio](recipes/youtube-rss-podcast-replaced-audio.md)
 
 **Video & ad analysis**
 
