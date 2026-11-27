@@ -114,3 +114,5 @@ The existing script is a short chaining example, not a production ingestion pipe
 - [Check which YouTube transcripts a batch actually delivered](youtube-transcript-batch-handoff.md): reconcile requested IDs, usable timed rows and saved files before citing or rerunning.
 
 - [Transcribe the full Apple Podcasts episode, not its trailer](apple-podcasts-trailer-vs-full.md): select an individual full episode and check the exported text against its timing.
+
+- [Verify guest names before publishing a podcast transcript](podcast-transcript-proper-names.md): match each questionable spelling to the episode credits and its audio cue while preserving the original file.
