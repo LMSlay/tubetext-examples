@@ -100,6 +100,7 @@ The existing script is a short chaining example, not a production ingestion pipe
 - [Compare hotel stay totals without double-counting fees](google-hotels-stay-total-fees.md): separate the amount due now from the full price and verify mandatory charges.
 - [Check which diesel lane a station price applies to](gas-prices-diesel-lane-check.md): match the stop, product and payment basis before relying on a quote.
 - [Keep edited app reviews separate from new complaints](app-store-review-edits-vs-new.md): distinguish first observation from rating changes and account for sampling gaps.
+- [Why app-store stars can disagree with a review export](compare-app-review-samples.md): keep the displayed rating, the written sample average and a complaint share separate.
 - [Compare Amazon first and recurring subscription prices](amazon-subscribe-save-first-delivery.md): keep one-time, first-shipment and upcoming costs separate.
 - [Check TikTok Shop stock and purchase limits separately](tiktok-shop-stock-vs-purchase-limit.md): distinguish available units, buyer quantity limits and promotion eligibility.
 - [B站分P、章节、合集怎么标转录引用](bilibili-part-chapter-collection.md): preserve the exact playable source and its timestamp clock.
