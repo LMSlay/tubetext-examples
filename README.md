@@ -51,6 +51,7 @@ To choose tools by task before trying an example, browse the [TubeText product c
   - [Keep long podcast transcripts from disappearing in spreadsheets](recipes/podcast-transcript-spreadsheet-cell-limits.md)
   - [Check podcast timestamps after an audio edit or ad insertion](recipes/podcast-transcript-audio-version-timestamps.md) (fictional worked example, no Actor run)
   - [Check which YouTube video matches revised podcast RSS audio](recipes/youtube-rss-podcast-replaced-audio.md)
+  - [Why YouTube's dubbed audio and transcript use different languages](recipes/youtube-auto-dub-caption-language.md)
   - [Find a spoken phrase within an Apple Podcasts show](recipes/apple-podcasts-search-in-show.md)
 
 **Video & ad analysis**
