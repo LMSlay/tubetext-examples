@@ -90,3 +90,5 @@ The existing script is a short chaining example, not a production ingestion pipe
 - [Reconcile two review snapshots for a weekly brief](google-play-weekly-snapshot-reconciliation.md): a fictional, manual row-by-row exercise separating repeated records, changed text, first-seen dates and unresolved evidence. No new collection or live run is claimed.
 
 - [One Reel, three kinds of text: an AI reading handoff](instagram-reel-first-text-evidence-handoff.md): a fictional manual exercise separating a post caption, speech and screen text, with a source-status card and expected answer. No transcription or model run is claimed.
+
+- [Diagnose a legacy Steam reviews API redirect](steam-review-legacy-api-redirect.md): identify Store HTML in place of JSON, preserve data gaps, and compare filters before migrating.
