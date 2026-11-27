@@ -99,6 +99,7 @@ The existing script is a short chaining example, not a production ingestion pipe
 - [Compare Steam reviews by purchase source](steam-review-purchase-cohorts.md): separate Steam purchases, reviewer-declared free copies, and unknown records without inventing a payment history.
 - [Compare Steam reviews before and after a 1.0 launch](steam-early-access-review-timeline.md): use original posting time rather than a badge that can disappear after an edit.
 - [List a YouTube channel’s uploads before fetching transcripts](youtube-channel-transcript-shortlist.md): separate metadata discovery, selected captions and optional speech recognition.
+- [A YouTube link opens, but the transcript is missing](youtube-escaped-link-transcript.md): verify the Share link or ID, inspect stored result rows, and retry only unresolved videos.
 - [Compare hotel quotes for the guests who will actually stay](google-hotels-family-occupancy-check.md): verify adults, child ages and room assignments before comparing totals.
 - [Compare hotel stay totals without double-counting fees](google-hotels-stay-total-fees.md): separate the amount due now from the full price and verify mandatory charges.
 - [Check which diesel lane a station price applies to](gas-prices-diesel-lane-check.md): match the stop, product and payment basis before relying on a quote.
