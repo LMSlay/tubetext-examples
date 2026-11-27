@@ -105,6 +105,7 @@ The existing script is a short chaining example, not a production ingestion pipe
 - [Compare Amazon first and recurring subscription prices](amazon-subscribe-save-first-delivery.md): keep one-time, first-shipment and upcoming costs separate.
 - [Keep Amazon variant switches out of a price history](amazon-variant-price-comparison.md): use the selected child item and separate an unverified snapshot from an actual price change.
 - [Check TikTok Shop stock and purchase limits separately](tiktok-shop-stock-vs-purchase-limit.md): distinguish available units, buyer quantity limits and promotion eligibility.
+- [Compare TikTok Shop hooks with product clicks and orders](tiktok-shop-hook-click-order.md): use public clips for ideas and your own Seller Center for results.
 - [B站分P、章节、合集怎么标转录引用](bilibili-part-chapter-collection.md): preserve the exact playable source and its timestamp clock.
 - [Edit Apple Podcasts’ automatic chapters](apple-podcasts-chapter-edit.md): reuse the native TXT list, verify same-episode boundaries, and confirm what listeners see after refresh.
 - [Recover a podcast transcript export without starting over](podcast-transcript-export-recovery.md): check existing output and reconcile episodes before resubmitting or replacing a healthy archive.
