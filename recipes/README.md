@@ -99,6 +99,7 @@ The existing script is a short chaining example, not a production ingestion pipe
 - [Compare hotel quotes for the guests who will actually stay](google-hotels-family-occupancy-check.md): verify adults, child ages and room assignments before comparing totals.
 - [Compare hotel stay totals without double-counting fees](google-hotels-stay-total-fees.md): separate the amount due now from the full price and verify mandatory charges.
 - [Check which diesel lane a station price applies to](gas-prices-diesel-lane-check.md): match the stop, product and payment basis before relying on a quote.
+- [Keep edited app reviews separate from new complaints](app-store-review-edits-vs-new.md): distinguish first observation from rating changes and account for sampling gaps.
 - [Edit Apple Podcasts’ automatic chapters](apple-podcasts-chapter-edit.md): reuse the native TXT list, verify same-episode boundaries, and confirm what listeners see after refresh.
 - [Recover a podcast transcript export without starting over](podcast-transcript-export-recovery.md): check existing output and reconcile episodes before resubmitting or replacing a healthy archive.
 - [Read a multi-city fare without counting it twice](google-flights-multi-city-fare-scope.md): distinguish a first flight option from its whole-trip quote.
