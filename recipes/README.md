@@ -97,6 +97,7 @@ The existing script is a short chaining example, not a production ingestion pipe
 - [Compare Steam reviews by purchase source](steam-review-purchase-cohorts.md): separate Steam purchases, reviewer-declared free copies, and unknown records without inventing a payment history.
 - [List a YouTube channel’s uploads before fetching transcripts](youtube-channel-transcript-shortlist.md): separate metadata discovery, selected captions and optional speech recognition.
 - [Compare hotel quotes for the guests who will actually stay](google-hotels-family-occupancy-check.md): verify adults, child ages and room assignments before comparing totals.
+- [Compare hotel stay totals without double-counting fees](google-hotels-stay-total-fees.md): separate the amount due now from the full price and verify mandatory charges.
 - [Edit Apple Podcasts’ automatic chapters](apple-podcasts-chapter-edit.md): reuse the native TXT list, verify same-episode boundaries, and confirm what listeners see after refresh.
 - [Recover a podcast transcript export without starting over](podcast-transcript-export-recovery.md): check existing output and reconcile episodes before resubmitting or replacing a healthy archive.
 - [Read a multi-city fare without counting it twice](google-flights-multi-city-fare-scope.md): distinguish a first flight option from its whole-trip quote.
