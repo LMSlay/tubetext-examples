@@ -97,3 +97,4 @@ The existing script is a short chaining example, not a production ingestion pipe
 - [Compare Steam reviews by purchase source](steam-review-purchase-cohorts.md): separate Steam purchases, reviewer-declared free copies, and unknown records without inventing a payment history.
 - [List a YouTube channel’s uploads before fetching transcripts](youtube-channel-transcript-shortlist.md): separate metadata discovery, selected captions and optional speech recognition.
 - [Compare hotel quotes for the guests who will actually stay](google-hotels-family-occupancy-check.md): verify adults, child ages and room assignments before comparing totals.
+- [Edit Apple Podcasts’ automatic chapters](apple-podcasts-chapter-edit.md): reuse the native TXT list, verify same-episode boundaries, and confirm what listeners see after refresh.
