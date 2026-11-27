@@ -118,3 +118,4 @@ The existing script is a short chaining example, not a production ingestion pipe
 - [Verify guest names before publishing a podcast transcript](podcast-transcript-proper-names.md): match each questionable spelling to the episode credits and its audio cue while preserving the original file.
 
 - [Read the local arrival date before booking an airport pickup](flight-arrival-local-date.md): keep the final airport and its calendar date with the arrival time, separate from elapsed travel time.
+- [Find a YouTube video from a line you remember](find-youtube-video-from-a-quote.md): search caption text first, verify the original timestamp, then extract transcripts only from known candidates when needed.
