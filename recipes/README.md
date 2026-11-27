@@ -112,3 +112,5 @@ The existing script is a short chaining example, not a production ingestion pipe
 - [Keep editable captions with a finished video](caption-rebuild-handoff.md): package the timed captions and their source edit so a later text change does not require a second transcription.
 
 - [Check which YouTube transcripts a batch actually delivered](youtube-transcript-batch-handoff.md): reconcile requested IDs, usable timed rows and saved files before citing or rerunning.
+
+- [Transcribe the full Apple Podcasts episode, not its trailer](apple-podcasts-trailer-vs-full.md): select an individual full episode and check the exported text against its timing.
