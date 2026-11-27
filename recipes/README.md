@@ -38,6 +38,8 @@ _Checked against the public README, input schema and effective event pricing on 
 
 ## YouTube Shorts research: metadata first, captions second
 
+[How public Shorts views differ from Engaged views](youtube-shorts-view-counts.md).
+
 Use [YouTube Shorts Scraper](https://apify.com/tubetext/youtube-shorts-scraper) when you know the channels and need a small comparison shortlist before reading transcripts.
 
 1. **Define the sample.** Put known channels in `channels`, set `includeTranscript: false`, and choose `sinceDate` plus a small `maxShortsPerChannel` (default 30; maximum 5,000). Channels are listed newest first. A date window with a result cap is a sample, not every Short published in that period or a platform-wide trend search.
