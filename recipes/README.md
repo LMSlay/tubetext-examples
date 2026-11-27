@@ -94,3 +94,4 @@ The existing script is a short chaining example, not a production ingestion pipe
 - [Diagnose a legacy Steam reviews API redirect](steam-review-legacy-api-redirect.md): identify Store HTML in place of JSON, preserve data gaps, and compare filters before migrating.
 - [Compare Steam reviews with and without off-topic periods](steam-review-off-topic-window.md): test one documented filter without confusing a review spike with a Valve-designated exclusion.
 - [Compare Spotify playlist exports without losing repeated tracks](spotify-playlist-export-occurrences.md): separate placements, unique tracks, and observed lifetime stream counts.
+- [Compare Steam reviews by purchase source](steam-review-purchase-cohorts.md): separate Steam purchases, reviewer-declared free copies, and unknown records without inventing a payment history.
