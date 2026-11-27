@@ -108,3 +108,5 @@ The existing script is a short chaining example, not a production ingestion pipe
 - [Read a multi-city fare without counting it twice](google-flights-multi-city-fare-scope.md): distinguish a first flight option from its whole-trip quote.
 
 - [Align chunked subtitles with the original video timeline](rebase-chunked-subtitle-timestamps.md): keep the actual start of each cut, move both cue endpoints onto the source clock, and check overlaps at each join.
+
+- [Keep editable captions with a finished video](caption-rebuild-handoff.md): package the timed captions and their source edit so a later text change does not require a second transcription.
