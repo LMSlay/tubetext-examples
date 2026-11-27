@@ -116,3 +116,5 @@ The existing script is a short chaining example, not a production ingestion pipe
 - [Transcribe the full Apple Podcasts episode, not its trailer](apple-podcasts-trailer-vs-full.md): select an individual full episode and check the exported text against its timing.
 
 - [Verify guest names before publishing a podcast transcript](podcast-transcript-proper-names.md): match each questionable spelling to the episode credits and its audio cue while preserving the original file.
+
+- [Read the local arrival date before booking an airport pickup](flight-arrival-local-date.md): keep the final airport and its calendar date with the arrival time, separate from elapsed travel time.
