@@ -102,6 +102,7 @@ The existing script is a short chaining example, not a production ingestion pipe
 - [Keep edited app reviews separate from new complaints](app-store-review-edits-vs-new.md): distinguish first observation from rating changes and account for sampling gaps.
 - [Compare Amazon first and recurring subscription prices](amazon-subscribe-save-first-delivery.md): keep one-time, first-shipment and upcoming costs separate.
 - [Check TikTok Shop stock and purchase limits separately](tiktok-shop-stock-vs-purchase-limit.md): distinguish available units, buyer quantity limits and promotion eligibility.
+- [B站分P、章节、合集怎么标转录引用](bilibili-part-chapter-collection.md): preserve the exact playable source and its timestamp clock.
 - [Edit Apple Podcasts’ automatic chapters](apple-podcasts-chapter-edit.md): reuse the native TXT list, verify same-episode boundaries, and confirm what listeners see after refresh.
 - [Recover a podcast transcript export without starting over](podcast-transcript-export-recovery.md): check existing output and reconcile episodes before resubmitting or replacing a healthy archive.
 - [Read a multi-city fare without counting it twice](google-flights-multi-city-fare-scope.md): distinguish a first flight option from its whole-trip quote.
