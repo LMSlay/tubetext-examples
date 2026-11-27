@@ -95,3 +95,4 @@ The existing script is a short chaining example, not a production ingestion pipe
 - [Compare Steam reviews with and without off-topic periods](steam-review-off-topic-window.md): test one documented filter without confusing a review spike with a Valve-designated exclusion.
 - [Compare Spotify playlist exports without losing repeated tracks](spotify-playlist-export-occurrences.md): separate placements, unique tracks, and observed lifetime stream counts.
 - [Compare Steam reviews by purchase source](steam-review-purchase-cohorts.md): separate Steam purchases, reviewer-declared free copies, and unknown records without inventing a payment history.
+- [List a YouTube channel’s uploads before fetching transcripts](youtube-channel-transcript-shortlist.md): separate metadata discovery, selected captions and optional speech recognition.
