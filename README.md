@@ -20,6 +20,7 @@ The response is the dataset as JSON: one item per video, product, ad, review and
 ## Folders
 - [`python/`](python/) – minimal Python scripts using the official `apify-client`.
 - [`recipes/`](recipes/) – multi-Actor pipelines (chain one Actor's dataset into another).
+  - [Find the original Apify dataset when a Pipedream result has no inline output](recipes/pipedream-apify-empty-output-dataset.md)
 - [`n8n/`](n8n/) – importable n8n workflows (HTTP Request node, no community nodes needed).
 
 ## Find an n8n workflow by task
