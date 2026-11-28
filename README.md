@@ -99,6 +99,7 @@ To choose tools by task before trying an example, browse the [TubeText product c
 - [Taobao & Tmall Product Scraper](https://apify.com/tubetext/taobao-tmall-scraper) – Taobao/Tmall products by Chinese or English keyword, category or URL: CNY prices, shops and seller scores
 - [Alibaba & Yiwu Supplier Finder by Image](https://apify.com/tubetext/alibaba-yiwu-image-search) – product photo in, similar Alibaba.com and Yiwu wholesale listings out: price, MOQ, supplier, country and rating
 - [Amazon Product Search Scraper](https://apify.com/tubetext/amazon-product-search-scraper) – Amazon search results and product pages: price, rating, reviews, monthly sales signal, badges and specs
+  - [Track coupon visibility separately from listed Amazon prices](recipes/amazon-coupon-vs-listed-price.md)
 - [Google Flights Scraper](https://apify.com/tubetext/google-flights-scraper) – flight prices for any route, a cheapest-day calendar and low/typical/high price insights
 
 ## Issues
