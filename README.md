@@ -51,6 +51,7 @@ To choose tools by task before trying an example, browse the [TubeText product c
 - [Podcast & Video Transcript](https://apify.com/tubetext/any-video-podcast-transcript) – podcast RSS / Apple Podcasts, X, Facebook, Loom, Twitch and audio files to text
   - [Find a line in a Vimeo transcript or download the existing subtitle file](recipes/vimeo-transcript-view-vs-download.md)
   - [Repair a missing transcript section without shifting later captions](recipes/repair-transcript-gap-with-source-time.md)
+  - [Fix an SRT import offset in Final Cut Pro](recipes/final-cut-pro-srt-relative-vs-absolute.md)
 - [Facebook Video Transcript](https://apify.com/tubetext/facebook-video-transcript) – public Facebook videos and Reels to text with Whisper AI
 - [X (Twitter) Video Transcript](https://apify.com/tubetext/twitter-x-video-transcript) – X/Twitter video posts to text with Whisper AI
 - [Bilibili Video Transcript](https://apify.com/tubetext/bilibili-video-transcript) – Bilibili (B站) videos to text with Whisper AI, plus optional English summaries
