@@ -67,6 +67,7 @@ To choose tools by task before trying an example, browse the [TubeText product c
   - [Find a spoken phrase within an Apple Podcasts show](recipes/apple-podcasts-search-in-show.md)
   - [Troubleshoot a missing Apple Podcasts transcript](recipes/apple-podcasts-transcript-not-showing.md)
   - [Show subtitles without replacing the Apple Podcasts video](recipes/apple-video-podcast-transcript-vs-subtitles.md)
+  - [Attach separate WebVTT language tracks to a web player](recipes/webvtt-separate-language-tracks.md)
   - [Choose a speaker-label workflow for mixed podcast audio or separate tracks](recipes/podcast-speaker-labels-mixed-audio-vs-tracks.md)
 
 **Video & ad analysis**
