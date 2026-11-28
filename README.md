@@ -46,6 +46,7 @@ To choose tools by task before trying an example, browse the [TubeText product c
 - [TikTok Transcript Scraper](https://apify.com/tubetext/tiktok-transcript) – TikTok captions plus Whisper AI, SRT and timestamps
 - [Instagram Reels Transcript](https://apify.com/tubetext/instagram-reels-transcript) – reel links or @usernames to text with Whisper AI
   - [Distinguish Reel post captions, speech and on-screen text](recipes/instagram-reel-caption-vs-transcript.md)
+  - [Monitor newly posted Reels without counting old pinned videos](recipes/instagram-reels-monitoring-publication-date.md)
 - [Podcast & Video Transcript](https://apify.com/tubetext/any-video-podcast-transcript) – podcast RSS / Apple Podcasts, X, Facebook, Loom, Twitch and audio files to text
 - [Facebook Video Transcript](https://apify.com/tubetext/facebook-video-transcript) – public Facebook videos and Reels to text with Whisper AI
 - [X (Twitter) Video Transcript](https://apify.com/tubetext/twitter-x-video-transcript) – X/Twitter video posts to text with Whisper AI
