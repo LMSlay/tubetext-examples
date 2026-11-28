@@ -98,6 +98,7 @@ To choose tools by task before trying an example, browse the [TubeText product c
 - [TikTok Shop Product Scraper](https://apify.com/tubetext/tiktok-shop-product-scraper) – US TikTok Shop prices, items sold, stock per SKU and shop stats
 - [AliExpress Search Scraper](https://apify.com/tubetext/aliexpress-search-scraper) – AliExpress search results by keyword: price, items sold, rating, shipping, badges
 - [Google Hotels Scraper](https://apify.com/tubetext/google-hotels-scraper) – hotel prices for any destination and dates, per booking site and as a 90-day price calendar
+  - [Distinguish a rounded nightly rate from the displayed stay total](recipes/google-hotels-nightly-vs-stay-total.md)
 - [Taobao & Tmall Product Scraper](https://apify.com/tubetext/taobao-tmall-scraper) – Taobao/Tmall products by Chinese or English keyword, category or URL: CNY prices, shops and seller scores
 - [Alibaba & Yiwu Supplier Finder by Image](https://apify.com/tubetext/alibaba-yiwu-image-search) – product photo in, similar Alibaba.com and Yiwu wholesale listings out: price, MOQ, supplier, country and rating
 - [Amazon Product Search Scraper](https://apify.com/tubetext/amazon-product-search-scraper) – Amazon search results and product pages: price, rating, reviews, monthly sales signal, badges and specs
