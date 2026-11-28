@@ -50,6 +50,7 @@ To choose tools by task before trying an example, browse the [TubeText product c
 - [Facebook Video Transcript](https://apify.com/tubetext/facebook-video-transcript) – public Facebook videos and Reels to text with Whisper AI
 - [X (Twitter) Video Transcript](https://apify.com/tubetext/twitter-x-video-transcript) – X/Twitter video posts to text with Whisper AI
 - [Bilibili Video Transcript](https://apify.com/tubetext/bilibili-video-transcript) – Bilibili (B站) videos to text with Whisper AI, plus optional English summaries
+  - [B 站 CC 字幕、语音稿和弹幕怎么选？](recipes/bilibili-transcript-vs-danmaku.md)
 - [Podcast Transcript](https://apify.com/tubetext/podcast-transcript) – podcast RSS feeds and Apple Podcasts episodes to text with Whisper AI
   - [Keep long podcast transcripts from disappearing in spreadsheets](recipes/podcast-transcript-spreadsheet-cell-limits.md)
   - [Check podcast timestamps after an audio edit or ad insertion](recipes/podcast-transcript-audio-version-timestamps.md) (fictional worked example, no Actor run)
