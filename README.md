@@ -71,6 +71,7 @@ To choose tools by task before trying an example, browse the [TubeText product c
   - [Compare two Weibo hot-search exports](recipes/assets/weibo-rank-comparison/) (38-second fictional demo, captions, and transcript)
 - [WeChat Article Scraper](https://apify.com/tubetext/wechat-articles-scraper) – WeChat 公众号 articles by keyword or link: full text, English titles and optional English summaries
 - [Google Play Reviews + AI Insights](https://apify.com/tubetext/google-play-reviews-ai) – Android app reviews by star rating, country and language, plus an AI report of complaints and praise
+  - [Compare Google Play complaint samples when exports hit a limit](recipes/compare-capped-google-play-review-samples.md)
 
 **E-commerce & travel**
 
