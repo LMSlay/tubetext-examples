@@ -43,6 +43,7 @@ To choose tools by task before trying an example, browse the [TubeText product c
 
 - [YouTube Transcript Scraper](https://apify.com/tubetext/youtube-transcript-fast) – videos, Shorts, playlists and whole channels to text; Whisper AI when there are no captions
   - [Distinguish YouTube playlist additions from video release dates](recipes/youtube-playlist-added-date-vs-video-published-date.md)
+  - [YouTube livestreams: scheduled start vs actual start](recipes/youtube-live-scheduled-vs-actual-start.md)
   - [Why YouTube live captions differ from a replay transcript](recipes/youtube-live-captions-vs-replay-transcript.md)
   - [Identify masked words in YouTube auto-caption exports](recipes/youtube-caption-masked-words.md)
   - [Tell a transcript summary from a title-and-description preview](recipes/youtube-summary-captions-vs-metadata.md)
