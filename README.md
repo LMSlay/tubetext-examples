@@ -71,6 +71,7 @@ To choose tools by task before trying an example, browse the [TubeText product c
 
 - [Video Breakdown AI](https://apify.com/tubetext/video-breakdown-ai) – hook analysis, shot list, cut pacing, products shown and script of any TikTok, Reel or YouTube video
   - [Check whether an AI video breakdown covers the ending](recipes/check-video-analysis-ending.md)
+  - [Separate video edit pacing from story beats](recipes/video-edit-cut-rate-vs-story-beats.md)
 - [Video Ad Analyzer](https://apify.com/tubetext/video-ad-analyzer) – analyze competitor Meta and YouTube video ads from brands, domains or existing video links. Get hooks, offers, CTAs, scripts and shot breakdowns.
   Before running: review the [public output sample](https://apify.com/tubetext/video-ad-analyzer), then follow the [review-first creative brief walkthrough](https://dev.to/lmslay/turn-competitor-video-ads-into-an-original-creative-brief-with-source-links-27if).
 - [Meta Ad Library Video Ads](https://apify.com/tubetext/meta-ad-library-videos) – any brand's Facebook and Instagram video ads with video URL, ad copy, CTA and landing page
