@@ -104,6 +104,8 @@ To choose tools by task before trying an example, browse the [TubeText product c
   - [Track coupon visibility separately from listed Amazon prices](recipes/amazon-coupon-vs-listed-price.md)
 - [idealo Price Scraper](https://apify.com/tubetext/idealo-price-scraper) – public merchant offer snapshots across six idealo markets
   - [Compare offers by total including shipping](recipes/idealo-compare-price-including-shipping.md)
+- [Gas Prices Scraper](https://apify.com/tubetext/gas-prices-scraper) – public station fuel-price observations in the US and Canada
+  - [Compare station prices without mixing gallons, liters, or currencies](recipes/compare-us-canada-station-fuel-prices.md)
 - [Google Flights Scraper](https://apify.com/tubetext/google-flights-scraper) – flight prices for any route, a cheapest-day calendar and low/typical/high price insights
 
 ## Issues
