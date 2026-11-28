@@ -102,6 +102,8 @@ To choose tools by task before trying an example, browse the [TubeText product c
 - [Alibaba & Yiwu Supplier Finder by Image](https://apify.com/tubetext/alibaba-yiwu-image-search) – product photo in, similar Alibaba.com and Yiwu wholesale listings out: price, MOQ, supplier, country and rating
 - [Amazon Product Search Scraper](https://apify.com/tubetext/amazon-product-search-scraper) – Amazon search results and product pages: price, rating, reviews, monthly sales signal, badges and specs
   - [Track coupon visibility separately from listed Amazon prices](recipes/amazon-coupon-vs-listed-price.md)
+- [idealo Price Scraper](https://apify.com/tubetext/idealo-price-scraper) – public merchant offer snapshots across six idealo markets
+  - [Compare offers by total including shipping](recipes/idealo-compare-price-including-shipping.md)
 - [Google Flights Scraper](https://apify.com/tubetext/google-flights-scraper) – flight prices for any route, a cheapest-day calendar and low/typical/high price insights
 
 ## Issues
