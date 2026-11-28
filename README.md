@@ -64,6 +64,7 @@ To choose tools by task before trying an example, browse the [TubeText product c
   - [Why YouTube's dubbed audio and transcript use different languages](recipes/youtube-auto-dub-caption-language.md)
   - [Find a spoken phrase within an Apple Podcasts show](recipes/apple-podcasts-search-in-show.md)
   - [Troubleshoot a missing Apple Podcasts transcript](recipes/apple-podcasts-transcript-not-showing.md)
+  - [Choose a speaker-label workflow for mixed podcast audio or separate tracks](recipes/podcast-speaker-labels-mixed-audio-vs-tracks.md)
 
 **Video & ad analysis**
 
