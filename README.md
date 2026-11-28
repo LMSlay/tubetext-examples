@@ -91,6 +91,7 @@ To choose tools by task before trying an example, browse the [TubeText product c
 - [WeChat Article Scraper](https://apify.com/tubetext/wechat-articles-scraper) – WeChat 公众号 articles by keyword or link: full text, English titles and optional English summaries
 - [Google Play Reviews + AI Insights](https://apify.com/tubetext/google-play-reviews-ai) – Android app reviews by star rating, country and language, plus an AI report of complaints and praise
   - [Compare Google Play complaint samples when exports hit a limit](recipes/compare-capped-google-play-review-samples.md)
+  - [Group Google Play reviews by app version, not just review date](recipes/google-play-review-version-vs-release-date.md)
 - [Steam Reviews Scraper + AI Insights](https://apify.com/tubetext/steam-reviews-scraper) – public Steam review text and optional AI analysis
   - [Audit crash mentions before counting software bug reports](recipes/steam-review-crash-keyword-audit.md)
 
