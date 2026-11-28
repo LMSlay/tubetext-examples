@@ -1,0 +1,12 @@
+# Compare Google Play complaint samples when exports hit a limit
+
+“Newest 200 reviews” is a row limit, not a time window. A busy app might fill it in three days; another might take a month. Ranking their raw complaint totals can turn different periods into a misleading comparison.
+
+1. **Match the settings.** Use the same Google Play country, language, sort order, dates and star selection for each app. Record the run time, the row limit, how many written review rows came back and the oldest and newest observed review dates. Exclude summary, AI and diagnostic rows.
+2. **Mark possible truncation.** If an app returns the configured maximum and the oldest row is newer than your planned start, mark the start as unverified. Do not assume older reviews are absent. Fewer rows than the limit do not prove completeness either; check run status and any errors or missing pages. Use the same timezone on exported dates.
+3. **Use a shared observed period or keep the samples separate.** For newest-first results, a practical comparison can start *after* the latest oldest observed date to avoid tallying its potentially partial day. Only use days that are defensibly represented for each app. Report window, sample sizes and unknown coverage. If that period is too short, say so instead of ranking the apps.
+4. **Name the denominator.** “12 of 40 sampled one- and two-star reviews mention crashes” describes complaint themes. It cannot tell you what share of all reviews, ratings or users experienced a crash. To describe the share of low ratings among written reviews, pull all stars under the same sampling rules and compute within those written rows.
+
+**Fictional example:** An export requested Nov 1–14. App A hits 200 rows with an oldest observed date of Nov 11. App B returns 73 and reaches Nov 1. You can inspect Nov 12–14 among both saved exports if the runs and days are comparable; do not report App A's missing Nov 1–10 as zero. If reviewing complaint themes, label each fraction with its sampled low-star denominator.
+
+The [TubeText Google Play input schema](https://apify.com/tubetext/google-play-reviews-ai/input-schema) documents newest sorting and review, date, star, country and language filters. A start date filters older results; it does not remove the row cap. The optional AI report summarizes a documented sample, not a full historical census. Check the [current pricing page](https://apify.com/tubetext/google-play-reviews-ai/pricing) before starting another run. This example uses no live reviews or Actor execution.
