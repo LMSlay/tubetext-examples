@@ -41,6 +41,7 @@ To choose tools by task before trying an example, browse the [TubeText product c
 **Transcripts**
 
 - [YouTube Transcript Scraper](https://apify.com/tubetext/youtube-transcript-fast) – videos, Shorts, playlists and whole channels to text; Whisper AI when there are no captions
+  - [Distinguish YouTube playlist additions from video release dates](recipes/youtube-playlist-added-date-vs-video-published-date.md)
   - [Why YouTube live captions differ from a replay transcript](recipes/youtube-live-captions-vs-replay-transcript.md)
   - [Get the transcript for a YouTube time range](recipes/youtube-share-timestamp-transcript-range.md)
 - [TikTok Transcript Scraper](https://apify.com/tubetext/tiktok-transcript) – TikTok captions plus Whisper AI, SRT and timestamps
