@@ -46,6 +46,7 @@ To choose tools by task before trying an example, browse the [TubeText product c
   - [Tell a transcript summary from a title-and-description preview](recipes/youtube-summary-captions-vs-metadata.md)
   - [Get the transcript for a YouTube time range](recipes/youtube-share-timestamp-transcript-range.md)
 - [TikTok Transcript Scraper](https://apify.com/tubetext/tiktok-transcript) – TikTok captions plus Whisper AI, SRT and timestamps
+  - [Keep TikTok video IDs intact when importing CSV into Excel](recipes/keep-tiktok-video-ids-as-text.md)
 - [Instagram Reels Transcript](https://apify.com/tubetext/instagram-reels-transcript) – reel links or @usernames to text with Whisper AI
   - [Distinguish Reel post captions, speech and on-screen text](recipes/instagram-reel-caption-vs-transcript.md)
   - [Monitor newly posted Reels without counting old pinned videos](recipes/instagram-reels-monitoring-publication-date.md)
